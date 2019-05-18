@@ -7,36 +7,8 @@ alias fixperms='~/scripts/fixperms.sh'
 alias untargz='tar xvf'
 alias rm='rm -i'
 alias ff="find . -name "
-alias dirsize "du -sh"
-
-# perforce 
-
-alias gitadd='p4 add'
-gitadd() { 
-  echo "=== ALIAS: Face me 'git add', you cowardly clum! ===";
-  git add 
-}
-
-alias gitadd='p4 opened'
-gitadd() { 
-  echo "=== ALIAS: Face me 'git status', you cowardly clum! ==="; 
-  git status 
-}
-
-# p4 revert p4 edit vgp4checkin [some sync command]
-alias gitadd='p4 revert'
-gitadd() { 
-  echo "=== ALIAS: Face me 'git reset', you egomaniacal elekk! ==="; 
-  git reset 
-}
-
-alias gitadd='p4 del'
-gitadd() { 
-  echo "=== ALIAS: Face me 'git rm -r', you inept ingrate! ==="; 
-  git rm -r 
-}
-
-
+alias dirsize="du -sh"
+alias ls="ls -la"
 
 #Face me, you addled amateur!
 #Face me, you cowardly clum!
