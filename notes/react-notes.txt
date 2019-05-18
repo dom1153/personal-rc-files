@@ -1,0 +1,40 @@
+Tools/utililties
+> Install npm
+npm install -g yarn
+npm install -g live-server
+npm install -g babel-cli@6.24.1
+
+npm uninstall -g babel-cli live-server
+yarn add live-server babel@6.24.1
+(installing the babel env, react is via yarn init and the package.json)
+
+
+<script src="https://unpkg.com/react@16/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@16/dist/react.js"></script>
+// -dom is the browser version
+
+babel -> to translte your javacsript to support old stuff and do wacky stuff
+
+https://babeljs.io/
+https://reactjs.org/docs/cdn-links.html
+https://reactjs.org/docs/events.html
+https://reactjs.org/docs/dom-elements.html
+https://webpack.js.org/concepts/
+
+yarn init
+
+babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+
+regenerating node modules
+	yarn install
+		searches the json and re-installs
+
+mdn bind
+
+npm install --save
+https://webpack.js.org/concepts/modules/
+https://webpack.js.org/configuration/dev-server/
+
+no longer needed:
+    "build": "webpack --watch",
+    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"

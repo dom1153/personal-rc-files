@@ -1,0 +1,13 @@
+Ex commands
+  :[range]copy [address]    (alias t, copy 'to')
+    :9t.                    // relative? use -/+ on numbers
+
+Movement:
+  g; g, (back, forth)
+  :changes
+  ctrl-i / ctrl-o
+  :jumps 
+
+" for yank/paste registers
+
+# remember to steal the notes from your workstation!

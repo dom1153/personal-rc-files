@@ -1,0 +1,7 @@
+These are hidden files
+Most files are self explanitory if you know what they are. Otherwise they are described here:
+  paths.txt: text description of where preference files go, in a location:file format
+
+Linking preference files to this repo:
+   cd ~
+   ln -s (this repo location)/file .

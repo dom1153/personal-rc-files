@@ -1,0 +1,58 @@
+# === scripts ===
+# recursivly set files and folders to be non-executable
+alias fixperms='~/scripts/fixperms.sh'
+
+# === general unix commands ===
+# interactive rm instead of no prompt
+alias untargz='tar xvf'
+alias rm='rm -i'
+alias ff="find . -name "
+alias dirsize "du -sh"
+
+# perforce 
+
+alias gitadd='p4 add'
+gitadd() { 
+  echo "=== ALIAS: Face me 'git add', you cowardly clum! ===";
+  git add 
+}
+
+alias gitadd='p4 opened'
+gitadd() { 
+  echo "=== ALIAS: Face me 'git status', you cowardly clum! ==="; 
+  git status 
+}
+
+# p4 revert p4 edit vgp4checkin [some sync command]
+alias gitadd='p4 revert'
+gitadd() { 
+  echo "=== ALIAS: Face me 'git reset', you egomaniacal elekk! ==="; 
+  git reset 
+}
+
+alias gitadd='p4 del'
+gitadd() { 
+  echo "=== ALIAS: Face me 'git rm -r', you inept ingrate! ==="; 
+  git rm -r 
+}
+
+
+
+#Face me, you addled amateur!
+#Face me, you cowardly clum!
+#Face me, you egomaniacal elekk!
+#Face me, you inept ingrate!
+#Face me, you meddling moron!
+#Face me, you overgrown oaf!
+#Face me, you ridiculous rustbucket!
+#Face me, you tilted tyrant!
+#Face me, you vapid vermin!
+#You blithering bumpkin!
+#You disreputable dunce!
+#You gigantic goose!
+#You jabbering junkie!
+#You noxious ninny!
+#You pathetic pipsqueak!
+#You silly sloth!
+#You ungrateful underling!
+#You wretched wretch!

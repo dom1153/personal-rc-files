@@ -1,0 +1,8 @@
+## shortcuts
+| Mac Key          | What it really means |
+| ---------------- | ---------------------|
+| fn + left/right  | home / end           |
+| fn + up/down     | pg up / down         |
+| ⌘               | command               |
+| ⌥               | option                |
+| ⌃               | control               |
