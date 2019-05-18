@@ -2,3 +2,4 @@
 ~:.vimrc
 ~:.alias
 ~:.perforcealias
+~:notes
