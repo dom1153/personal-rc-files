@@ -9,6 +9,7 @@ alias rm='rm -i'
 alias ff="find . -name "
 alias dirsize="du -sh"
 alias ls="ls -la"
+alias l="ls -la"
 
 #Face me, you addled amateur!
 #Face me, you cowardly clum!
