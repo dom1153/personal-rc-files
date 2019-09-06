@@ -3,3 +3,4 @@
 ~:.alias
 ~:.perforcealias
 ~:notes
+~:.imwheelrc

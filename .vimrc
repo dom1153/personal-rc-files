@@ -12,7 +12,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'connorholyday/vim-snazzy'   " colorscheme. 
+Plugin 'connorholyday/vim-snazzy'   " colorscheme.
 Plugin 'tpope/vim-commentary'       " comment stuff via 'gcc'
 
 call vundle#end()
