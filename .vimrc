@@ -15,7 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'connorholyday/vim-snazzy'   " colorscheme.
 Plugin 'tpope/vim-commentary'       " comment stuff via 'gcc'
 Plugin 'tpope/vim-surround'         " surround
-PLugin 'tpope/vim-repeat'           " repeat more (surround)
+Plugin 'tpope/vim-repeat'           " repeat more (surround)
 
 call vundle#end()
 filetype plugin indent on           " required
