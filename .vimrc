@@ -154,11 +154,11 @@ map <C-RIGHT> :tabnext<CR>
 
 " === scripts/autocmd ===
 if v:version >= 800 || (has("&relativenumber"))
-    " augroup numbertoggle
-    "   autocmd!
-    "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-    " augroup END
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  augroup END
 
   " make it easier to read when set wrap is on
   if exists("&breakindent")
