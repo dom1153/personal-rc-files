@@ -50,7 +50,9 @@ case `uname` in
   ;;
   Linux)
     # set cursor speed (DELAY RATE)
-    xset r rate 150 30
+    if [ -n "`command -v foo >/dev/null 2>&1`" ]; then
+      xset r rate 150 30
+    fi
  
     # turn off some dumb highlighting with folders with ls
     export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
