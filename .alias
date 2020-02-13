@@ -8,13 +8,8 @@ alias untargz='tar xvf'
 alias rm='rm -i'
 alias ff="find . -name "
 alias dirsize="du -sh"
-<<<<<<< HEAD
-alias ls="ls -la"
 alias l="ls -la"
-=======
 alias la="ls -la"
-alias ll="ls -la"
->>>>>>> ed577f31dcf3e2832ae0ca82868355021f696415
 
 #Face me, you addled amateur!
 #Face me, you cowardly clum!
