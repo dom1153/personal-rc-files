@@ -1,0 +1,61 @@
+" navigate windows
+map <LEFT> <C-W>h
+map <RIGHT> <C-W>l
+map <UP> <C-W>k
+map <DOWN> <C-W>j
+
+" navigate tabs
+" map <C-LEFT> :tabprev<CR>
+" map <C-RIGHT> :tabnext<CR>
+
+"set paste              " proper paste marks from outside sources (middle mouse)
+                        " disabled for use with abbreviations
+
+" hi visual term=reverse
+if v:version >= 800 || (has("&relativenumber"))
+endif
+"set statusline=%f%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v][%B]
+"              | | | | |  |   |      |  |     |    |
+"              | | | | |  |   |      |  |     |    +-- current column
+"              | | | | |  |   |      |  |     +-- current line
+"              | | | | |  |   |      |  +-- current % into file
+"              | | | | |  |   |      +-- current syntax
+"              | | | | |  |   +-- current fileformat
+"              | | | | |  +-- number of lines
+"              | | | | +-- preview flag in square brackets
+"              | | | +-- help flag in square brackets
+"              | | +-- readonly flag in square brackets
+"              | +-- rodified flag in square brackets
+"              +-- full path to file in the buffer
+"set confirm             " set vim to ask what to do with unsaved files
+"set hidden              " preserve buffers, very useful
+
+  let g:solarized_termcolors=256
+  set background=dark
+  silent! colorscheme solarized
+
+" exit with ctrl-x
+noremap <C-x> :q<Enter>
+" save with ctrl-s
+noremap <C-s> :w<Enter>
+
+" === unmap (normal mode) arrow keys ===
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+noremap <C-up> <nop>
+noremap <C-down> <nop>
+noremap <C-left> <nop>
+noremap <C-right> <nop>
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>  " edit vimrc using using \ev
+nmap <silent> <leader>sv :so $MYVIMRC<CR> " reload vimrc using \sv
+
+" vim version 8 or patched 7.4
+" when textwrapping on indented lines, keep their indent
+if exists("&breakindent")
+    set breakindent
+    set breakindentopt=shift:2
+endif

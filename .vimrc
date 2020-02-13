@@ -23,15 +23,12 @@ if filereadable("~/.vim/bundle/Vundle.vim")
 endif
 " ======================= Vundle END ====================================="
 
-syntax on     " set syntax highlighting on of course
-
 " highlilght color settings (gui primarily)
 hi CursorLine guibg=grey5
 hi Normal guibg=grey17
 hi search guibg=yellow guifg=grey10
 hi incsearch guibg=yellow guifg=grey10 gui=none
 hi cursor guifg=black
-" hi visual term=reverse
 hi visual term=bold cterm=bold ctermfg=1 gui=bold guifg=LightBlue guibg=grey30
 
 " === indenting modes ===
@@ -45,29 +42,28 @@ if exists("&breakindent")
 endif
 
 " === UI config ==="
-set autowrite           " save any changes before taking actions (like make)
-set cmdheight=2         " set bottom bar height vim (defualt=1)
+syntax on               " set syntax highlighting on of course
 set cursorline          " highlight current line selected
-set laststatus=2        " always have lastwindow with status line (2 = always keep)
-set linebreak           " keep words together when wrap is on
-set nowrap              " no linewrap (I don't personally like this much)
-set number              " line number
-"set relativenumber      " relative number (combined with number in 7.4 is a hybrid mode)
-set ruler               " show line number and status bar info
-set scrolloff=3         " minimum lines to see above and below
-set shortmess+=I        " remove splaschreen
-set showcmd             " shows last command. visual mode has more info
-set showmode            " tells you when in non-normal mode
 set wildmenu            " shows list instead of just completing
-set wildmode=list:longest,full
-set foldlevel=0         " always have everything folded
-"set paste               " proper paste marks from outside sources (middle mouse)
+set wildmode=list:longest,full 
+set lazyredraw          " redraw only when needed
+set shortmess+=I        " remove splaschreen
+set number              " line number
+set nowrap              " no linewrap (I don't personally like this much)
+set laststatus=2        " set statusline
 set statusline=%f\ %m%r%h%w
 set statusline+=%=
 set statusline+=\%l:\%v\ %02p%%
 set statusline+=\ %y[BUF\ %n][%L\ lines]
-set list                " for showing whitespace chars
-set listchars=tab:>-    " show tabs as so
+set autowrite           " autowrite file before running command
+set linebreak           " keep words together when wrap is on
+set list                " show list chars
+set listchars=tab:>-    " display tabs as so
+set scrolloff=3         " min number of lines to see above and below
+
+if has('mouse')
+    set mouse=nv            " enable mouse in all modes (norm, ins, vis, all)
+endif
 
 " === Indent settings ===
 set expandtab           " tabs = spaces
@@ -79,8 +75,6 @@ set tabstop=2           " set size of tabs
 " === vim behavior settings === "
 set autochdir           " auto change directory!
 set backspace=indent,eol,start  " fix any more backspace stuff
-"set confirm             " set vim to ask what to do with unsaved files
-"set hidden              " preserve buffers, very useful
 
 " === Searching ==="
 set incsearch
@@ -104,70 +98,43 @@ if has("gui_running")
   set guioptions-=T
   set guioptions-=r " enable right scrollbar
   set guioptions-=L " disable left scrollbar??
+  set cursorline    " highlight current line selected
   colorscheme desert
   " turn of all beeps
   set belloff=all
 else
   set vb t_vb=
-  let g:solarized_termcolors=256
-  set background=dark
-  silent! colorscheme solarized
 endif
 
 " === Key mappings ===
-" exit with ctrl-x
-noremap <C-x> :q<Enter>
-" save with ctrl-s
-noremap <C-s> :w<Enter>
 " select all
 noremap <C-a> ggVG    
 
-" === Clipboard shortcuts ===
+" next/previous buffer
+nnoremap <c-n> :bn<CR>
+nnoremap <c-p> :bp<CR>
+
 " copy/paste from clip board
 noremap <C-S-c> "+y   
 noremap <C-S-v> "+p
 
-" === unmap (normal mode) arrow keys ===
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-noremap <C-up> <nop>
-noremap <C-down> <nop>
-noremap <C-left> <nop>
-noremap <C-right> <nop>
-
 " remove highlight with ,\ hotkey
-nmap <silent> ,/ :nohlsearch<CR>
-
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>  " edit vimrc using using \ev
-nmap <silent> <leader>sv :so $MYVIMRC<CR> " reload vimrc using \sv
-
-" navigate windwos
-map <LEFT> <C-W>h
-map <RIGHT> <C-W>l
-map <UP> <C-W>k
-map <DOWN> <C-W>j
-
-" navigate tabs
-map <C-LEFT> :tabprev<CR>
-map <C-RIGHT> :tabnext<CR>
+" nmap <silent> ,/ :nohlsearch<CR>
 
 " === scripts/autocmd ===
 if v:version >= 800 || (has("&relativenumber"))
+  set relativenumber      " relative number (combined with number in 7.4 is a hybrid mode)
   augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
   augroup END
-
-  " make it easier to read when set wrap is on
-  if exists("&breakindent")
-      set breakindent
-      set breakindentopt=shift:2
-  endif
 endif
+
+" === abbreviations/macro (see :ab) ===
+" you can precursor with autcmd FileType as well
+"iabbrev addcsh #!/bin/csh -f
+"iabbrev adddebug -diag +generatec -cflg -g -asmflg -g -zoix=debug
 
 " === filetype recognition ===
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -176,11 +143,21 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufRead * let &modifiable = !&readonly
 
 " === Plugin Settings ===
-"autocmd FileType apache setlocal commentstring=#\ %s
+" === tpope comment
 autocmd FileType csh setlocal commentstring=#\ %s
+autocmd FileType tcsh setlocal commentstring=#\ %s
+autocmd FileType sh setlocal commentstring=#\ %s
+autocmd FileType conf setlocal commentstring=#\ %s
+autocmd FileType python setlocal commentstring=#\ %s
+" // comments
 autocmd FileType c setlocal commentstring=//\ %s
 autocmd FileType cpp setlocal commentstring=//\ %s
+autocmd FileType verilog setlocal commentstring=//\ %s
+autocmd FileType systemverilog setlocal commentstring=//\ %s
+" vim comments
+autocmd FileType vim setlocal commentstring=\"\ %s
 
-" abbreviations/macro (see :ab)
-"iabbrev addcsh #!/bin/csh -f
-"iabbrev adddebug -diag +generatec -cflg -g -asmflg -g -zoix=debug
+" netrw is the default file explorer (plugin). toggle with i in explorer. 
+" 3 = tree view
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
