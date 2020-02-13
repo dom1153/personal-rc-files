@@ -90,9 +90,9 @@ set smartcase
 set showmatch
 
 " === swap/backup/ undo files ===
-silent !mkdir -p ~/.vim/.undo > /dev/null 2>&1
-silent !mkdir -p ~/.vim/.backup > /dev/null 2>&1
-silent !mkdir -p ~/.vim/.swp > /dev/null 2>&1
+silent! mkdir -p ~/.vim/.undo > /dev/null 2>&1
+silent! mkdir -p ~/.vim/.backup > /dev/null 2>&1
+silent! mkdir -p ~/.vim/.swp > /dev/null 2>&1
 if has("&undodir")
     set undodir=~/.vim/.undo//
 endif
