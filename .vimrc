@@ -5,18 +5,22 @@
 " Installing Vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " ======================= Vundle BEGIN ==================================="
-set nocompatible              " be iMproved, required
-filetype off                  " required
+if filereadable("~/.vim/bundle/Vundle.vim")
+  set nocompatible              " be iMproved, required
+  filetype off                  " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'connorholyday/vim-snazzy'   " colorscheme. 
-Plugin 'tpope/vim-commentary'       " comment stuff via 'gcc'
+  Plugin 'VundleVim/Vundle.vim'
+  Plugin 'connorholyday/vim-snazzy'   " colorscheme.
+  Plugin 'tpope/vim-commentary'       " comment stuff via 'gcc'
+  Plugin 'tpope/vim-surround'         " surround
+  Plugin 'tpope/vim-repeat'           " repeat more (surround)
 
-call vundle#end()
-filetype plugin indent on           " required
+  call vundle#end()
+  filetype plugin indent on           " required
+endif
 " ======================= Vundle END ====================================="
 
 syntax on     " set syntax highlighting on of course
@@ -152,11 +156,11 @@ map <C-RIGHT> :tabnext<CR>
 
 " === scripts/autocmd ===
 if v:version >= 800 || (has("&relativenumber"))
-    " augroup numbertoggle
-    "   autocmd!
-    "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-    " augroup END
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  augroup END
 
   " make it easier to read when set wrap is on
   if exists("&breakindent")

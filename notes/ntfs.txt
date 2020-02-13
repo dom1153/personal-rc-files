@@ -1,0 +1,4 @@
+brew install ntfs-3g
+sudo mkdir /Volumes/NTFS
+diskutil list
+sudo /usr/local/bin/ntfs-3g /dev/disk3s1 /Volumes/NTFS -olocal -oallow_other

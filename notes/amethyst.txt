@@ -1,0 +1,6 @@
+mod1: option + space
+mod2: option + space + ctrl
+
+mod2 + j / k : rotate main foucs
+mod1 + j / k : change focus
+mod1 + space : change layout

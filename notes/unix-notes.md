@@ -9,3 +9,13 @@
 Source:
 
 https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files
+
+## Snap commands
+
+```
+# update packages
+snap refresh
+snap refresh --list
+snap revert <package>
+snap remove <package>
+```

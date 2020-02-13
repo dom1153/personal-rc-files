@@ -1,0 +1,15 @@
+[user]
+	name = Dominic Dang
+	email = dtdd1153@live.com
+[core]
+	editor = vim
+[alias]
+	edit = add
+	opened = status
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[credential]
+	helper = cache --timeout 7200
