@@ -1,0 +1,94 @@
+
+// To view the default settings, hold "alt" while clicking on the "Settings" button.
+// For documentation on these settings, see: https://aka.ms/terminal-documentation
+
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    "defaultProfile": "{00000000-0000-0000-ba54-000000000002}",
+    
+    // Globals
+    "copyOnSelect": true,
+    "alwaysShowTabs": true,
+    "requestedTheme": "system",
+    "snapToGridOnResize": true,
+    "confirmCloseAllTabs": true,
+
+    // Profiles
+    // https://github.com/microsoft/terminal/blob/master/doc/cascadia/SettingsSchema.md
+    "profiles":
+    [
+        {
+            "guid": "{00000000-0000-0000-ba54-000000000002}",
+            "commandline": "\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l",
+	        "useAcrylic": false,
+            "cursorColor": "#FFFFFF",
+            "cursorShape": "vintage",
+            "fontFace": "Cascadia Code",
+            "fontSize": 10,
+            "name": "Git Bash",
+            "icon": "ms-appdata:///Local/ubuntu-icon.png",
+            "startingDirectory": "%USERPROFILE%",
+            "suppressApplicationTitle": true,
+            // https://1041uuu.tumblr.com/ ; https://www.reddit.com/r/wallpapergif/top/?t=all
+            "backgroundImage": "ms-appdata:///Local/pixels11.gif",
+            "backgroundImageOpacity": 0.05
+            // "backgroundImageStretchMode": "uniformToFill"
+            // "none", "fill", "uniform", "uniformToFill"
+        },
+        {
+            // Make changes here to the cmd.exe profile
+            "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+            "name": "cmd",
+            "commandline": "cmd.exe",
+            "hidden": false,
+            "backgroundImage": "ms-appdata:///Local/pixels10.gif",
+            "backgroundImageOpacity": 0.05
+        },
+        {
+            // Make changes here to the powershell.exe profile
+            "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+            "name": "Windows PowerShell",
+            "commandline": "powershell.exe",
+            "backgroundImage": "ms-appdata:///Local/pixels4.gif",
+            "backgroundImageOpacity": 0.1,
+            "hidden": false
+        },
+        
+        {
+            "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+            "name": "Azure Cloud Shell",
+            "source": "Windows.Terminal.Azure",
+	        "hidden": true
+        }
+    ],
+
+    // Add custom color schemes to this array
+    "schemes": [],
+
+    // Add any keybinding overrides to this array.
+    // To unbind a default keybinding, set the command to "unbound"
+    "keybindings": [
+	    { "command": "closePane", "keys": ["ctrl+shift+w"] },
+        { "command": "copy", "keys": ["ctrl+shift+c"] },
+        { "command": "paste", "keys": ["ctrl+shift+v"] },
+        { "command": "newTab", "keys": ["ctrl+shift+t"] },
+        { "command": "closePane", "keys": ["ctrl+shift+x"] },
+        { "command": "find", "keys": ["ctrl+shift+f"] },
+        { "command": "moveFocusLeft", "keys": ["ctrl+shift+left"] },
+        { "command": "moveFocusRight", "keys": ["ctrl+shift+right"] },
+        { "command": "moveFocusUp", "keys": ["ctrl+shift+up"] },
+        { "command": "moveFocusDown", "keys": ["ctrl+shift+down"] },
+        { "command": "nextTab", "keys": ["ctrl+tab"] },
+        { "command": "prevTab", "keys": ["ctrl+shift+tab"] },
+        { 
+            "command":
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "argument": "auto"
+            },
+            "keys": ["ctrl+shift+d"]
+        }
+	]
+}

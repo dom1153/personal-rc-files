@@ -1,5 +1,5 @@
 # we don't have p4 installed, but we can make a function!
-p4() {
+function p4() {
   if [[ $1 == 'add' || $1 == 'edit' ]]; then
     echo "=== ALIAS: You blithering bumpkin! Try 'git add' next time!";
     shift;

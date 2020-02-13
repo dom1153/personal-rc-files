@@ -1,6 +1,9 @@
 # === scripts ===
 # recursivly set files and folders to be non-executable
-alias fixperms='~/scripts/fixperms.sh'
+function fixperms() {
+  find ${1} -type d -exec chmod 755 {} +
+  find ${1} -type f -exec chmod 644 {} +
+}
 
 # === general unix commands ===
 # interactive rm instead of no prompt
@@ -8,24 +11,28 @@ alias untargz='tar xvf'
 alias rm='rm -i'
 alias ff="find . -name "
 alias dirsize="du -sh"
-alias l="ls -la"
-alias la="ls -la"
+alias l="ls -lh"
+alias la="ls -lah"
+alias dirsize="du -sh"
+alias dirsizecurrent="du -sh ./*"
+alias dirsizecurrentsorted="echo 'Calculating...'; du -shc ./* | sort -rh"
+alias diffleft="diff --changed-group-format='%<' --unchanged-group-format=''"
+alias diffright="diff --changed-group-format='%>' --unchanged-group-format=''"
+# alias chexe='find . -type f -print0 | xargs -0 chmod 644 >& /dev/null; chmod 755 *.csh *.sh zoix.sim simv >& /dev/null'
 
-#Face me, you addled amateur!
-#Face me, you cowardly clum!
-#Face me, you egomaniacal elekk!
-#Face me, you inept ingrate!
-#Face me, you meddling moron!
-#Face me, you overgrown oaf!
-#Face me, you ridiculous rustbucket!
-#Face me, you tilted tyrant!
-#Face me, you vapid vermin!
-#You blithering bumpkin!
-#You disreputable dunce!
-#You gigantic goose!
-#You jabbering junkie!
-#You noxious ninny!
-#You pathetic pipsqueak!
-#You silly sloth!
-#You ungrateful underling!
-#You wretched wretch!
+function si() {
+  if [ -n "$1" ]; then
+    grep "$1" . -ri "${@:2}";
+  else
+    echo "usage: si <search-term> [<args>]"
+  fi
+}
+
+function sii() {
+  if [ -n "$1" ]; then
+    grep "$1" . -ri --include="$2" "${@:3}";
+  else
+    echo "usage: sii <search-term> <filter-pattern> [<args>]"
+    echo "  e.g. sii main *.c"
+  fi
+}
