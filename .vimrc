@@ -6,7 +6,6 @@
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " ======================= Vundle BEGIN ==================================="
 if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
-  echo "test"
   set nocompatible              " be iMproved, required
   filetype off                  " required
 
