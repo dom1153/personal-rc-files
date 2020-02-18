@@ -107,7 +107,7 @@ if has("gui_running")
   set guioptions-=T
   set guioptions-=r " enable right scrollbar
   set guioptions-=L " disable left scrollbar??
-  set cursorline    " highlight current line selected
+  "set cursorline    " highlight current line selected
   colorscheme desert
   " turn of all beeps
   set belloff=all
