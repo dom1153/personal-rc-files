@@ -7,9 +7,21 @@ case `uname` in
   ;;
 esac
 
-ln -s .alias ~/
-ln -s .bash_profile ~/
-ln -s .gitconfig ~/
-ln -s .perforcealias ~/
-ln -s .vimrc ~/
-echo "SCRIPT: Done!"
+wd="`dirname $0`/../"
+dotfiles=(.alias .bash_profile .perforcealias .vimrc)
+for d in ${arr[*]}
+do
+  echo "$d"
+done
+# cd ~
+#if [[ -f "$FILE" ]]; then
+  #ln -s $wd/.alias ~/
+#endif
+#if [[ -f "$FILE" ]]; then
+#ln -s $wd/.bash_profile ~/
+#endif
+#ln -s $wd/.gitconfig ~/
+#ln -s $wd/.perforcealias ~/
+#ln -s $wd/.vimrc ~/
+#echo "SCRIPT: Done!"
+#cd -

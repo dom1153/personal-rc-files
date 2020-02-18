@@ -43,7 +43,6 @@ endif
 
 " === UI config ==="
 syntax on               " set syntax highlighting on of course
-set cursorline          " highlight current line selected
 set wildmenu            " shows list instead of just completing
 set wildmode=list:longest,full 
 set lazyredraw          " redraw only when needed
@@ -84,14 +83,24 @@ set smartcase
 set showmatch
 
 " === swap/backup/ undo files ===
-silent! mkdir -p ~/.vim/.undo > /dev/null 2>&1
-silent! mkdir -p ~/.vim/.backup > /dev/null 2>&1
-silent! mkdir -p ~/.vim/.swp > /dev/null 2>&1
+
 if has("&undodir")
-    set undodir=~/.vim/.undo//
+  if isdirectory(expand("~/.vim/.undo/"))
+    set undodir=~/.vim/.undo/
+  else
+    silent ! mkdir -p ~/.vim/.undo
+  endif
 endif
-set backupdir=~/.vim/.backup//
-set directory=~/.vim/.swp//
+if isdirectory(expand("~/.vim/.backup/"))
+  set backupdir=~/.vim/.backup/
+else
+  silent ! mkdir -p ~/.vim/.backup
+endif
+if isdirectory(expand("~/.vim/.swp//"))
+  set directory=~/.vim/.swp/
+else
+  silent ! mkdir -p ~/.vim/.swp
+endif
 
 " ==== GUI settings / Color Scheme===
 if has("gui_running") 
