@@ -11,8 +11,13 @@ export EDITOR='vim'
 # ===
 # === SOURCE FILES
 # ===
-source ~/.alias
-source ~/.perforcealias
+if [ -f ~/.alias ]; then
+  source ~/.alias
+fi
+
+if [ -f ~/.perforcealias ]; then
+  source ~/.perforcealias
+fi
 
 # ===
 # === ALIASES
