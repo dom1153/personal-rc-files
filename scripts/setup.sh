@@ -8,20 +8,10 @@ case `uname` in
 esac
 
 wd="`dirname $0`/../"
-dotfiles=(.alias .bash_profile .perforcealias .vimrc)
-for d in ${arr[*]}
+dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc)
+for d in ${dotfiles[*]}
 do
-  echo "$d"
+  echo "ln -s "$wd/$d" ~/"
+  ln -s "$wd/$d" ~/
 done
-# cd ~
-#if [[ -f "$FILE" ]]; then
-  #ln -s $wd/.alias ~/
-#endif
-#if [[ -f "$FILE" ]]; then
-#ln -s $wd/.bash_profile ~/
-#endif
-#ln -s $wd/.gitconfig ~/
-#ln -s $wd/.perforcealias ~/
-#ln -s $wd/.vimrc ~/
-#echo "SCRIPT: Done!"
-#cd -
+echo "SCRIPT: Done!"
