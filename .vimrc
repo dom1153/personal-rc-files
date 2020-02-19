@@ -23,14 +23,6 @@ if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
 endif
 " ======================= Vundle END ====================================="
 
-" highlilght color settings (gui primarily)
-hi CursorLine guibg=grey5
-hi Normal guibg=grey17
-hi search guibg=yellow guifg=grey10
-hi incsearch guibg=yellow guifg=grey10 gui=none
-hi cursor guifg=black
-hi visual term=bold cterm=bold ctermfg=1 gui=bold guifg=LightBlue guibg=grey30
-
 " === indenting modes ===
 set autoindent
 set smartindent
@@ -107,13 +99,23 @@ if has("gui_running")
   set guioptions-=T
   set guioptions-=r " enable right scrollbar
   set guioptions-=L " disable left scrollbar??
-  "set cursorline    " highlight current line selected
+  set cursorline    " highlight current line selected
   colorscheme desert
+
+  " highlilght color settings (gui primarily) [must be set after colorscheme]
+  hi CursorLine guibg=grey5
+  hi Normal guibg=grey17
+  hi search guibg=yellow guifg=grey10
+  hi incsearch guibg=yellow guifg=grey10 gui=none
+  hi cursor guifg=black
+  hi visual term=bold cterm=bold ctermfg=1 gui=bold guifg=LightBlue guibg=grey30
   " turn of all beeps
   set belloff=all
 else
   set vb t_vb=
 endif
+
+
 
 " === Key mappings ===
 " select all
