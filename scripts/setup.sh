@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 case `uname` in
   MSYS_NT-10.0)
@@ -7,8 +7,8 @@ case `uname` in
   ;;
 esac
 
-wd="`dirname $0`/../"
-dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc)
+wd="`dirname $PWD/$0`/../"
+dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig)
 for d in ${dotfiles[*]}
 do
   echo "ln -s "$wd/$d" ~/"
