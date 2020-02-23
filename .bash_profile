@@ -38,7 +38,7 @@ magenta="\[\033[35m\]"
 cyan="\[\033[36m\]"
 white="\[\033[37m\]"
 endcolor="\[\033[0m\]"
-export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${magenta}\d${endcolor} | ${magenta}\@${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
+export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
 
 # ===
 # === TERM SETTINGS
