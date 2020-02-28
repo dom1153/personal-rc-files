@@ -29,12 +29,6 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
-# =========================== PLUGINS ==================================
-#plugins=(git)
-if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  plugins+=("zsh-autosuggestions")
-fi
-
 # =========================== ENV VARIABLES ============================
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR='vim'
@@ -51,12 +45,16 @@ stty -ixon
 
 # =========================== OS SPECIFIC SETTINGS =====================
 case `uname` in
+  MSYS_NT-10.0)
+  ;;
   Darwin)
     ZSH_DISABLE_COMPFIX=true
   ;;
   Linux)
     # set cursor speed (DELAY RATE)
-    xset r rate 150 30
+    if [ -n "`command -v foo >/dev/null 2>&1`" ]; then
+      xset r rate 150 30
+    fi
  
     # turn off some dumb highlighting with folders with ls
     export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
