@@ -4,46 +4,11 @@
 
 " Installing Vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" ======================= Vundle BEGIN ==================================="
-if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
-  set nocompatible              " be iMproved, required
-  filetype off                  " required
-
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'connorholyday/vim-snazzy'   " colorscheme.
-  Plugin 'tpope/vim-commentary'       " comment stuff via 'gcc'
-  Plugin 'tpope/vim-surround'         " surround
-  Plugin 'tpope/vim-repeat'           " repeat more (surround)
-  " Plugin 'easymotion/vim-easymotion'  " easy finding with <leader>
-
-  if has("gui_running")
-      Plugin 'vim-airline/vim-airline'
-      Plugin 'vim-airline/vim-airline-themes'
-      let g:airline_theme='distinguished'
-      let g:airline_extensions = ["tabline"]
-      let g:airline_symbols_ascii = 1
-      let g:airline#extensions#default#section_truncate_width = {}
-      let g:airline#extensions#tabline#enabled = 1
-      let g:airline#extensions#tabline#show_tab_count = 0
-      let g:airline#extensions#tabline#show_tab_nr = 0
-      let g:airline#extensions#tabline#left_sep = ''
-      let g:airline#extensions#tabline#left_alt_sep = ''
-      let g:airline#extensions#tabline#right_sep = ''
-      let g:airline#extensions#tabline#right_alt_sep = ''
-      let g:airline#extensions#tabline#show_buffers = ''
-      let g:airline#extensions#tabline#show_close_button = 0
-      let g:airline_section_x = '%l:%v %02p%%'
-      let g:airline_section_y = '%y'
-      let g:airline_section_z = '[%L lines]'
-  endif
-
-  call vundle#end()
-  filetype plugin indent on           " required
+if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+    if filereadable(expand("~/.vimrc.pluginsettings"))
+        source ~/.vimrc.pluginsettings
+    endif
 endif
-" ======================= Vundle END ====================================="
 
 " === indenting modes ===
 set autoindent
