@@ -8,7 +8,7 @@ case `uname` in
 esac
 
 wd="`dirname $PWD/$0`/../"
-dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig .tmux.config .vimrc.pluginsettings)
+dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig .tmux.conf .vimrc.pluginsettings)
 for d in ${dotfiles[*]}
 do
   echo "ln -s "$wd/$d" ~/"
