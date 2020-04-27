@@ -5,10 +5,25 @@
 # AUTHOR: DOMINIC DANG
 
 # read bashrc if it exists
-# [[ -r ~/.bashrc ]] && . ~/.bashrc
+[[ -r ~/.bashrc ]] && . ~/.bashrc
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR='vim'
+
+# rbenv (ruby) setup https://github.com/rbenv/rbenv#basic-github-checkout
+if [ -d "$HOME/.rbenv/bin" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  if [ -d "$HOME/.rbenv/shims" ]; then
+    export PATH="$HOME/.rbenv/shims:$PATH"
+  fi
+  if [ -d "$HOME/gems" ]; then
+    export GEM_HOME="$HOME/gems"
+    export PATH="$HOME/gems/bin:$PATH"
+  fi
+  source ~/.rbenv/completions/rbenv.bash
+  rbenv rehash
+  eval "$(rbenv init -)"
+fi
 
 # ===
 # === SOURCE FILES
