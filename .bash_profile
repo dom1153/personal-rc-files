@@ -43,19 +43,6 @@ alias sx="source ~/.bash_profile"
 alias xx='vim ~/.bash_profile'
 
 # ===
-# === BASH SETTINGS
-# ===
-red="\[\033[31m\]"
-green="\[\033[32m\]"
-yellow="\[\033[33m\]"
-blue="\[\033[34m\]"
-magenta="\[\033[35m\]"
-cyan="\[\033[36m\]"
-white="\[\033[37m\]"
-endcolor="\[\033[0m\]"
-export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
-
-# ===
 # === TERM SETTINGS
 # ===
 # disable ctrl-s because thats for old terminals
@@ -76,42 +63,69 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+  xterm-color|*-256color) color_prompt=yes;;
 esac
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 unset color_prompt force_color_prompt
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
-
 
 # ===
 # === OS SPECIFIC SETTINGS 
 # ===
+shellos="UNKNOWN OS"
 case `uname` in
   MSYS_NT-10.0)
-  ;;
+    shellos="GIT BASH"
+    ;;
   Darwin)
     ZSH_DISABLE_COMPFIX=true
-  ;;
+    shellos="MAC"
+    ;;
   Linux)
+    shellos="LINUX"
     # set cursor speed (DELAY RATE)
     if [ -n "`command -v foo >/dev/null 2>&1`" ]; then
       xset r rate 150 30
     fi
- 
+    verpath="/proc/version"
+    if [ -f $verpath ] && [ "`grep 'Microsoft' $verpath`" ]; then
+      shellos="WSL"
+      # requires xserver such as vcsxsrv (sourceforge)
+      # see article: https://www.how2shout.com/how-to/run-linux-gui-apps-on-windows-10-with-native-bash.html
+      export DISPLAY="localhost:0"
+      export winhome="$(wslvar USERPROFILE)"
+      if [ -f ~/.windows-alias ]; then
+        source ~/.windows-alias
+      fi
+    fi
+
     # turn off some dumb highlighting with folders with ls
     export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-  ;;
+    ;;
 esac
+
+# ===
+# === PROMPT (BASH)
+# ===
+red="\[\033[31m\]"
+green="\[\033[32m\]"
+yellow="\[\033[33m\]"
+blue="\[\033[34m\]"
+magenta="\[\033[35m\]"
+cyan="\[\033[36m\]"
+white="\[\033[37m\]"
+endcolor="\[\033[0m\]"
+export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "

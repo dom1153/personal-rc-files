@@ -1,0 +1,6 @@
+function gowinhome() {
+  cd `wslpath $winhome`
+}
+function pwdwin() {
+  wslpath -w "`pwd`"
+}
