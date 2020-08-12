@@ -1,3 +1,5 @@
+#/bin/bash
+
 # === scripts ===
 # recursivly set files and folders to be non-executable
 function fixperms() {
@@ -13,11 +15,23 @@ alias ff="find . -name "
 alias dirsize="du -sh"
 alias l="ls -lh"
 alias la="ls -lah"
+alias hist="history"
 alias dirsize="du -sh"
-alias dirsizecurrent="du -sh ./*"
-alias dirsizecurrentsorted="echo 'Calculating...'; du -shc ./* | sort -rh"
+# alias dirsizecurrent="du -sh ./*"
+alias dirsizecurrent="echo 'Calculating...'; du -shc ./* | sort -rh"
 alias diffleft="diff --changed-group-format='%<' --unchanged-group-format=''"
 alias diffright="diff --changed-group-format='%>' --unchanged-group-format=''"
+
+function tkdiff() {
+  if [ "hash tkdiff" ]; then
+    echo "ALIAS: Backgrounding this for you with &"
+    `which tkdiff` $@ &
+  else
+    echo "tkdiff not found or installed"
+  fi
+}
+
+# multililne aliases
 function golink() {
   if [ -n "$1" ]; then
     l=$(readlink $1);
@@ -28,7 +42,6 @@ function golink() {
     echo "  e.g. sii ~/.vimrc"
   fi
 }
-# alias chexe='find . -type f -print0 | xargs -0 chmod 644 >& /dev/null; chmod 755 *.csh *.sh zoix.sim simv >& /dev/null'
 
 function si() {
   if [ -n "$1" ]; then
@@ -46,3 +59,5 @@ function sii() {
     echo "  e.g. sii main *.c"
   fi
 }
+
+# alias chexe='find . -type f -print0 | xargs -0 chmod 644 >& /dev/null; chmod 755 *.csh *.sh zoix.sim simv >& /dev/null'

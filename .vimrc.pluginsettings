@@ -7,30 +7,34 @@ Plugin 'tpope/vim-commentary'       " gcc to comment
 Plugin 'tpope/vim-surround'         " s command for surround
 Plugin 'tpope/vim-repeat'           " repeat with surround, etc
 Plugin 'wellle/targets.vim'         " motions go to nearby {} (e.g. cin{)
-Plugin 'easymotion/vim-easymotion'  " easy finding with <leader><leader>
 Plugin 'matchit.zip'                " % now works for <tags>
-Plugin 'bkad/CamelCaseMotion'       " camelcase with <leader>
+" Plugin 'easymotion/vim-easymotion'  " easy finding with <leader><leader>
+" Plugin 'bkad/CamelCaseMotion'       " camelcase with <leader>
 
-" camelcase
-if isdirectory(expand('~/.vim/bundle/CamelCaseMotion'))
-    let g:camelcasemotion_key = '<leader>'
-    map <silent> w <Plug>CamelCaseMotion_w
-    map <silent> b <Plug>CamelCaseMotion_b
-    map <silent> e <Plug>CamelCaseMotion_e
-    map <silent> ge <Plug>CamelCaseMotion_ge
-    sunmap w
-    sunmap b
-    sunmap e
-    sunmap ge
-    omap <silent> iw <Plug>CamelCaseMotion_iw
-    xmap <silent> iw <Plug>CamelCaseMotion_iw
-    omap <silent> ib <Plug>CamelCaseMotion_ib
-    xmap <silent> ib <Plug>CamelCaseMotion_ib
-    omap <silent> ie <Plug>CamelCaseMotion_ie
-    xmap <silent> ie <Plug>CamelCaseMotion_ie
-    imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
-    imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+if isdirectory(expand('~/.vim/bundle/hl_matchit.vim'))
+  let g:hl_matchit_enable_on_vim_startup = 1
+  let glhl_matchit_speed_level = 1
 endif
+
+" if isdirectory(expand('~/.vim/bundle/CamelCaseMotion'))
+"     let g:camelcasemotion_key = '<leader>'
+"     map <silent> w <Plug>CamelCaseMotion_w
+"     map <silent> b <Plug>CamelCaseMotion_b
+"     map <silent> e <Plug>CamelCaseMotion_e
+"     map <silent> ge <Plug>CamelCaseMotion_ge
+"     sunmap w
+"     sunmap b
+"     sunmap e
+"     sunmap ge
+"     omap <silent> iw <Plug>CamelCaseMotion_iw
+"     xmap <silent> iw <Plug>CamelCaseMotion_iw
+"     omap <silent> ib <Plug>CamelCaseMotion_ib
+"     xmap <silent> ib <Plug>CamelCaseMotion_ib
+"     omap <silent> ie <Plug>CamelCaseMotion_ie
+"     xmap <silent> ie <Plug>CamelCaseMotion_ie
+"     imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+"     imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+" endif
 
 " lightline (status line)
 if ((&t_Co == 256) || has("gui_running"))
@@ -66,3 +70,8 @@ endif
 
 call vundle#end()
 filetype plugin indent on
+
+" netrw is the default file explorer (plugin). toggle with i in explorer. 
+" 3 = tree view
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0

@@ -5,26 +5,16 @@
 " Installing Vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
-    if filereadable(expand("~/.vimrc.pluginsettings"))
-        source ~/.vimrc.pluginsettings
+      if filereadable(expand("~/.vimrc.pluginsettings"))
+          source ~/.vimrc.pluginsettings
     endif
-endif
-
-" === indenting modes ===
-set autoindent
-set smartindent
-" vim version 8 or patched 7.4
-" when textwrapping on indented lines, keep their indent
-if exists("&breakindent")
-    set breakindent
-    set breakindentopt=shift:2
 endif
 
 " === UI config ==="
 syntax on               " set syntax highlighting on of course
 set wildmenu            " shows list instead of just completing
 set wildmode=list:longest,full 
-set lazyredraw          " redraw only when needed
+" set lazyredraw          " redraw only when needed
 set shortmess+=I        " remove splaschreen
 set number              " line number
 set nowrap              " no linewrap (I don't personally like this much)
@@ -49,10 +39,14 @@ set shiftwidth=2        " size of 'indents'
 set smarttab            " auto space on tab?
 set softtabstop=0       " simulated tab size (when tab is pressed)
 set tabstop=2           " set size of tabs
-
-" === vim behavior settings === "
-set autochdir           " auto change directory!
-set backspace=indent,eol,start  " fix any more backspace stuff
+" not really sure what auto/smart do haha
+set autoindent
+set smartindent
+" when textwrapping on indented lines, keep their indent
+if exists("&breakindent")
+    set breakindent
+    set breakindentopt=shift:2
+endif
 
 " === Searching ==="
 set incsearch
@@ -61,8 +55,11 @@ set ignorecase
 set smartcase
 set showmatch
 
-" === swap/backup/ undo files ===
+" === vim behavior settings === "
+set autochdir           " auto change directory!
+set backspace=indent,eol,start  " fix any more backspace stuff
 
+" === swap/backup/ undo files ===
 if has("&undodir")
   if isdirectory(expand("~/.vim/.undo/"))
     set undodir=~/.vim/.undo/
@@ -84,10 +81,17 @@ endif
 " ==== GUI settings / Color Scheme===
 if has("gui_running") 
   set guioptions-=T
-  set guioptions-=r " enable right scrollbar
-  set guioptions-=L " disable left scrollbar??
-  set cursorline    " highlight current line selected
+  " set guioptions-=r " enable right scrollbar
+  " set guioptions-=L " disable left scrollbar??
+  " set cursorline    " highlight current line selected
   colorscheme desert
+  set lines=25 columns=80
+
+  if has("gui_gtk3") || has("gui_gtk2")
+    " set guifont=Inconsolata\ 12
+    " set guifont=Terminus\10
+    set guifont=DejaVu\ Sans\ Mono\ 9
+  endif
 
   " highlilght color settings (gui primarily) [must be set after colorscheme]
   hi CursorLine guibg=grey5
@@ -100,9 +104,8 @@ if has("gui_running")
   set belloff=all
 else
   set vb t_vb=
+  hi search cterm=NONE ctermfg=black ctermbg=yellow
 endif
-
-
 
 " === Key mappings ===
 " select all
@@ -133,6 +136,7 @@ endif
 " you can precursor with autcmd FileType as well
 "iabbrev addcsh #!/bin/csh -f
 "iabbrev adddebug -diag +generatec -cflg -g -asmflg -g -zoix=debug
+""iabbrev x y \<CR> for multiline
 
 " === filetype recognition ===
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -154,8 +158,3 @@ autocmd FileType verilog setlocal commentstring=//\ %s
 autocmd FileType systemverilog setlocal commentstring=//\ %s
 " vim comments
 autocmd FileType vim setlocal commentstring=\"\ %s
-
-" netrw is the default file explorer (plugin). toggle with i in explorer. 
-" 3 = tree view
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0

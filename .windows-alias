@@ -1,6 +1,52 @@
+#/bin/bash
+
+# https://github.com/wslutilities/wslu
+# https://pureinfotech.com/list-environment-variables-windows-10/
 function gowinhome() {
   cd `wslpath $winhome`
 }
+
 function pwdwin() {
   wslpath -w "`pwd`"
+}
+
+function godrive() {
+  cd "/mnt/$1"
+}
+
+function gocode() {
+  dir="~/code" 
+  if [ -d $dir ]; then
+    cd $dir
+  fi
+}
+
+function goweb() {
+  dir="~/code/web" 
+  if [ -d $dir ]; then
+    cd $dir
+  fi
+}
+
+function godownloads() {
+  # normally in `wslvar USERPROFILE` but I reroute them
+  # Use a symlink for operating independent routing
+  dir="~/documents" 
+  if [ -d $dir ]; then
+    cd $dir
+  fi
+}
+
+function godocuments() {
+  dir="~/documents" 
+  if [ -d $dir ]; then
+    cd $dir
+  fi
+}
+
+function godomdocs() {
+  dir="~/dom-docs" 
+  if [ -d $dir ]; then
+    cd $dir
+  fi
 }
