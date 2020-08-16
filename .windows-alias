@@ -1,52 +1,54 @@
 #/bin/bash
 
+function handlego() {
+  arg1="$1"
+  fn="${FUNCNAME[0]}"
+  if [ -z "$arg1" ]; then
+    echo "FUNCTION ERROR: no argument passed to '$fn'"
+    echo "  USAGE: $fn dirname"
+    return 1
+  fi
+
+  if [ -d "$arg1" ]; then
+    cd "$arg1"
+  else
+    echo "FUNCTION ERROR: directory '$arg1' not found, cannot cd to it"
+  fi
+}
+
 # https://github.com/wslutilities/wslu
 # https://pureinfotech.com/list-environment-variables-windows-10/
-function gowinhome() {
-  cd `wslpath $winhome`
-}
 
 function pwdwin() {
   wslpath -w "`pwd`"
 }
 
 function godrive() {
-  cd "/mnt/$1"
+  arg1="$1"
+  fn="${FUNCNAME[0]}"
+  echo "arg1: $arg1"
+  if [ -z "$arg1" ]; then
+    echo "FUNCTION ERROR: no argument passed to '$fn'"
+    echo "  USAGE: $fn [c|d|e|etc...]"
+    # printf does no newline
+    printf "  /mnt/ contains the following folders: "
+    ls '/mnt/'
+    return 1
+  fi
+  handlego "/mnt/$arg1"
 }
 
-function gocode() {
-  dir="~/code" 
-  if [ -d $dir ]; then
-    cd $dir
-  fi
-}
+function gocode() { handlego "$HOME/code"; }
 
-function goweb() {
-  dir="~/code/web" 
-  if [ -d $dir ]; then
-    cd $dir
-  fi
-}
+function goweb() { handlego "$HOME/code/web"; }
 
-function godownloads() {
-  # normally in `wslvar USERPROFILE` but I reroute them
-  # Use a symlink for operating independent routing
-  dir="~/documents" 
-  if [ -d $dir ]; then
-    cd $dir
-  fi
-}
+# optionall could use `wslvar USERPROFILE` but I reroute them
+# Use a symlink for operating independent routing
+function godownloads() { handlego "$HOME/downloads"; }
 
-function godocuments() {
-  dir="~/documents" 
-  if [ -d $dir ]; then
-    cd $dir
-  fi
-}
+function godocuments() { handlego "$HOME/documents"; }
 
-function godomdocs() {
-  dir="~/dom-docs" 
-  if [ -d $dir ]; then
-    cd $dir
-  fi
-}
+function godomdocs() { handlego "$HOME/dom-docs"; }
+
+# $winhome was exported at bash_profile
+function gouserprofile() { prof=`wslvar USERPROFILE`; handlego `wslpath $prof`; }

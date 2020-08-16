@@ -42,6 +42,9 @@ set tabstop=2           " set size of tabs
 " not really sure what auto/smart do haha
 set autoindent
 set smartindent
+" allow manual indent of # symbols
+set cindent
+set cinkeys-=0#
 " when textwrapping on indented lines, keep their indent
 if exists("&breakindent")
     set breakindent
