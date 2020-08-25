@@ -25,7 +25,7 @@ if [ -d "$HOME/.rbenv/bin" ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ "hash yarn" ]; then
+if [ `hash yarn 2>/dev/null` ]; then
   export PATH="$(yarn global bin):$PATH"
 fi
 
