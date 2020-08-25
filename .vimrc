@@ -28,6 +28,7 @@ set linebreak           " keep words together when wrap is on
 set list                " show list chars
 set listchars=tab:>-    " display tabs as so
 set scrolloff=3         " min number of lines to see above and below
+set encoding=utf-8      " allow unicode font
 
 if has('mouse')
     set mouse=nv            " enable mouse in all modes (norm, ins, vis, all)
@@ -161,3 +162,21 @@ autocmd FileType verilog setlocal commentstring=//\ %s
 autocmd FileType systemverilog setlocal commentstring=//\ %s
 " vim comments
 autocmd FileType vim setlocal commentstring=\"\ %s
+
+" :call GenerateUnicode(0x9900, 0x9fff)
+function! GenerateUnicode(first, last)
+  let i = a:first
+  while i <= a:last
+    if (i%256 == 0)
+      $put ='----------------------------------------------------'
+      $put ='     0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F '
+      $put ='----------------------------------------------------'
+    endif
+    let c = printf('%04X ', i)
+    for j in range(16)
+      let c = c . nr2char(i) . ' '
+      let i += 1
+    endfor
+    $put =c
+  endwhile
+endfunction

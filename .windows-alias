@@ -19,6 +19,24 @@ function handlego() {
 # https://github.com/wslutilities/wslu
 # https://pureinfotech.com/list-environment-variables-windows-10/
 
+function cdwin() {
+  arg1="$1"
+  fn="${FUNCNAME[0]}"
+  if [ -z "$arg1" ]; then
+    echo "FUNCTION ERROR: no argument passed to '$fn'"
+    echo "  USAGE: $fn 'F:\code\web' "
+    return 1
+  fi
+  # > /dev/null 2>&1
+  pth="`wslpath $arg1 `"
+  if [ ! -d "$pth" ]; then
+    echo "FUNCTION ERROR: Cannot find directory"
+    echo "  Hint: Try using quotes when passing the argument. Recieved arg: '$arg1'"
+    return 1
+  fi
+  cd "$pth"
+}
+
 function pwdwin() {
   wslpath -w "`pwd`"
 }
@@ -26,7 +44,6 @@ function pwdwin() {
 function godrive() {
   arg1="$1"
   fn="${FUNCNAME[0]}"
-  echo "arg1: $arg1"
   if [ -z "$arg1" ]; then
     echo "FUNCTION ERROR: no argument passed to '$fn'"
     echo "  USAGE: $fn [c|d|e|etc...]"
@@ -52,3 +69,6 @@ function godomdocs() { handlego "$HOME/dom-docs"; }
 
 # $winhome was exported at bash_profile
 function gouserprofile() { prof=`wslvar USERPROFILE`; handlego `wslpath $prof`; }
+
+# todo... make a simple argument checker funtion...
+# passin in fn name, with arg amount, and arg var.

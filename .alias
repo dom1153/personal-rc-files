@@ -45,7 +45,7 @@ function golink() {
 
 function si() {
   if [ -n "$1" ]; then
-    grep "$1" . -ri "${@:2}";
+    grep "$1" . -ri "${@:2}" --exclude-dir="node_modules";
   else
     echo "usage: si <search-term> [<args>]"
   fi
@@ -53,7 +53,7 @@ function si() {
 
 function sii() {
   if [ -n "$1" ]; then
-    grep "$1" . -ri --include="$2" "${@:3}";
+    grep "$1" . -ri --include="$2" "${@:3}" --exclude-dir="node_modules";
   else
     echo "usage: sii <search-term> <filter-pattern> [<args>]"
     echo "  e.g. sii main *.c"
