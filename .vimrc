@@ -120,8 +120,8 @@ nnoremap <c-n> :bn<CR>
 nnoremap <c-p> :bp<CR>
 
 " copy/paste from clip board
-noremap <C-S-c> "+y   
-noremap <C-S-v> "+p
+" noremap <C-S-c> "+y   
+" noremap <C-S-v> "+p
 
 " remove highlight with ,\ hotkey
 " nmap <silent> ,/ :nohlsearch<CR>

@@ -7,7 +7,8 @@
 # read bashrc if it exists
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# ~/.local/bin missing from path is a bash 4.4 bug
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 export EDITOR='vim'
 
 # rbenv (ruby) setup https://github.com/rbenv/rbenv#basic-github-checkout
@@ -25,7 +26,7 @@ if [ -d "$HOME/.rbenv/bin" ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ `hash yarn 2>/dev/null` ]; then
+if [ `command -v yarn 2>/dev/null` ]; then
   export PATH="$(yarn global bin):$PATH"
 fi
 
@@ -105,11 +106,15 @@ case `uname` in
       xset r rate 150 30
     fi
     verpath="/proc/version"
-    if [ -f $verpath ] && [ "`grep 'Microsoft' $verpath`" ]; then
+    if [ -f $verpath ] && [ "`grep -i 'Microsoft' $verpath`" ]; then
       shellos="WSL"
       # requires xserver such as vcsxsrv (sourceforge)
       # see article: https://www.how2shout.com/how-to/run-linux-gui-apps-on-windows-10-with-native-bash.html
-      export DISPLAY="localhost:0"
+      # updated (wsl 2 https://medium.com/javarevisited/using-wsl-2-with-x-server-linux-on-windows-a372263533c3)
+      # export DISPLAY="DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0"
+      # export DISPLAY="localhost:0"
+      # export DISPLAY="127.0.0.1:0.0"
+      # ... current status, just let wsl set the status, dont set manually
       export winhome="$(wslvar USERPROFILE)"
       if [ -f ~/.windows-alias ]; then
         source ~/.windows-alias

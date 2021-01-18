@@ -7,7 +7,8 @@ Plugin 'tpope/vim-commentary'       " gcc to comment
 Plugin 'tpope/vim-surround'         " s command for surround
 Plugin 'tpope/vim-repeat'           " repeat with surround, etc
 Plugin 'wellle/targets.vim'         " motions go to nearby {} (e.g. cin{)
-Plugin 'matchit.zip'                " % now works for <tags>
+Plugin 'adelarsq/vim-matchit'       " % now works for <tags>
+Plugin 'godlygeek/tabular'          " Align with :Tabular or :Tab command
 " Plugin 'easymotion/vim-easymotion'  " easy finding with <leader><leader>
 " Plugin 'bkad/CamelCaseMotion'       " camelcase with <leader>
 
