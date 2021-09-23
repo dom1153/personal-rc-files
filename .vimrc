@@ -100,15 +100,17 @@ if has("gui_running")
   " highlilght color settings (gui primarily) [must be set after colorscheme]
   hi CursorLine guibg=grey5
   hi Normal guibg=grey17
-  hi search guibg=yellow guifg=grey10
-  hi incsearch guibg=yellow guifg=grey10 gui=none
-  hi cursor guifg=black
+  hi search guibg=khaki guifg=black
+  hi incsearch guibg=lightblue guifg=black gui=none
+  hi Cursor gui=reverse guibg=NONE guifg=NONE
   hi visual term=bold cterm=bold ctermfg=1 gui=bold guifg=LightBlue guibg=grey30
   " turn of all beeps
   set belloff=all
 else
+  " note: windows terminal overrides cursor color and background
   set vb t_vb=
-  hi search cterm=NONE ctermfg=black ctermbg=yellow
+  hi search cterm=none ctermfg=black ctermbg=yellow
+  hi incsearch cterm=none ctermfg=black ctermbg=cyan
 endif
 
 " === Key mappings ===

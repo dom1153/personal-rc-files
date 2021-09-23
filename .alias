@@ -22,6 +22,7 @@ alias dirsize="du -sh"
 alias dirsizecurrent="echo 'Calculating...'; du -shc ./* | sort -rh"
 alias diffleft="diff --changed-group-format='%<' --unchanged-group-format=''"
 alias diffright="diff --changed-group-format='%>' --unchanged-group-format=''"
+alias where="whereis" # test... seems whereis works when where doesnt exist
 
 function tkdiff() {
   if [ "hash tkdiff" ]; then
