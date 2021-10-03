@@ -28,7 +28,7 @@ alias chexe='find . -maxdepth 1 -type f -print0 | xargs -0 chmod 644 >& /dev/nul
 function tkdiff() {
   if [ "hash tkdiff" ]; then
     echo "ALIAS: Backgrounding this for you with &"
-    `which tkdiff` $@ &
+    $(which tkdiff) $@ &
   else
     echo "tkdiff not found or installed"
   fi
@@ -65,7 +65,7 @@ function sii() {
 
 function cdf() {
   if [ -n "$1" ]; then
-    cd `dirname $1`
+    cd $(dirname $1)
   else
     echo "usage: ${FUNCNAME[0]} <filepath>"
     echo "  e.g. ${FUNCNAME[0]} ~/personal-files/.vimrc"
