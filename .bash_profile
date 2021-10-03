@@ -7,6 +7,9 @@
 # read bashrc if it exists
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
+# to search last command with ! type space instead of tab
+bind Space:magic-space
+
 # ~/.local/bin missing from path is a bash 4.4 bug
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 export EDITOR='vim'

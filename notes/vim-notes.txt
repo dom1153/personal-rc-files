@@ -1,13 +1,193 @@
-Ex commands
-  :[range]copy [address]    (alias t, copy 'to')
-    :9t.                    // relative? use -/+ on numbers
+=== vim notes ====
 
-Movement:
-  g; g, (back, forth)
-  :changes
-  ctrl-i / ctrl-o
-  :jumps 
+command line options:
+   -o                            open files (h)split
+   -O                            open files vsplit
+   -p                            open as tabs
+   --servername NAME             Launching a 'server' instance (no notify)
+   --remote-tab-silent "FILE"    open tab without notifying/taking focus
+   vi -                          read from buffer / piping to vi/vim (e.g. echo "hi" | vi -)
+   -u NONE                       open up user profile 'NONE' (vim without a vimrc)
 
-" for yank/paste registers
+general commands/motions
+   m  mark
+   ma  mark where cursor is a mark ‘a’
+   d’a  delete to mark a
 
-# remember to steal the notes from your workstation!
+navigation
+   ctrl + U / D   half page
+   ctrl + F / B   full page
+   { }            jump paragraph (blocks seperated by whitespace, sorta)
+   [{ ]}          jump parent brackets (see :help [)
+   ( )            jump sentances
+   ctrl-]         go to tag (ctrl+click)
+   H M L          move to top, middle, bottom of view
+   ''             toggle last position
+
+paste from register in insert mode
+   ctrl+r "       paste last delete/yank
+   ctrl+r *       paste current buffer
+
+copy/pasting clipboard
+   "+ is the system register
+   "* also works? :help x11-selection
+
+other copy/pasting
+   ["x]		      // use register x for next put/delete/yank
+      e.g. "xye	// store next word into x
+   :reg		      // shows whats in regs
+
+g motions
+   g; g,          next / previous in change list
+   g ctrl+] 		show tag list for all results
+   ctrl t 			to go back up the tag stack
+   gd             (go definition)
+   gg=G''         indent whole file
+   :changes
+   :jumps
+   ctrl-i / ctrl-o
+
+c motions
+   ci"            change in "
+   ca"            change in " (including ")
+
+visual motions
+   viw            visual select INNER word
+   vi{            grabs everyting (multiline incl) inside parens
+
+window commands
+   :wincmd or ctrl-w
+   wincmd v/h 	   spit horizontal/vert
+   :vs :sp
+   :winc[md] #    wincmd is a : substitue for ctrl-w
+   wincmd =       evenly space windows
+   wincmd _       'zoom' window vertically
+   wincmd |       'zoom' window horizontally
+   wincmd o       close all other panes
+   wincmd T       move window to new tab
+   wincmd R       swap with nearby window
+   wincmd H J K L move to fullsize l/b/t/r accordingly
+
+explorer commands:
+   v (open in vertical)
+   o (open in horziontal)
+
+: (ex) commands
+   :Vex                    vsplit explorer
+   :Sex                    split explorer
+   :set autoread           auto-load if changes
+   :tabmove INDX           rearrange tab
+   :! chmod +x %           chmod
+   :-16,-14co.             copy from line 16 to 14 above to 'here'
+   :find *.cmd             searches and opens (single) file (takes regex)
+   :vs :sp :tabnew         :e but with vertical/horizontal/tab
+   :retab                  tabs everything?
+   :bufdo /[pattern]       does (search) in every buffer
+   :g/string/d             deletes every instance of 'string' in the document
+   :tab ball               puts all buffers into their own tab
+   :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+                           use setlist, will display whitespaces etc
+   :sort :sort u           sort, and sort keeping only unique items (remove duplicates)
+   :tabs                   list all tabs (go to with #gt)
+   :tabm+1                 move tab to the right (- to go to left)
+   %gt                     go to tab by index number (start index=1)
+   :[range]copy [address]  (alias t, copy 'to')
+   :9t.                    // relative? use -/+ on numbers
+
+vim variables
+   set scrollbind          locks scroll between multiple panes?
+   set mouse=a             enable mouse support (ins, vis, norm, all)
+   set paste               fix formatting/indenting when pasting from clipboard to be as is
+   highlight               [sets highlight colors [visual select; search]
+
+operate on multiple instances of word
+   * to select
+   operating using gn (e.g. cgnfoo)
+   use . to repeat
+
+useful has menu
+   :h :version
+   :h has(
+   :h feature-list
+
+'macros'
+   'a,. s/output.log/compile.log/g
+      From mark a to current place (.) replace output.log with compile.log, g for all instances
+   :marks lists all bookmarks ('marks')
+   %s/\s\+$//e
+      remove trailing whitespaces
+
+substitute
+   :%s/before/after/g
+   %     whole file
+   gc    global, prompt with confirmation
+
+plugins (target.vim):
+	da{ (deletes next set of parens)
+	dA{ (deletes previous pair of parens)
+
+vimdiff
+   :diffthis <file> while in vim
+   :diffoff to turn it off
+   :diffupdate
+   vim -d <file1> <file2>
+   vimdiff
+   ]c [c    go to previous/next change
+
+   nice .vimrc setting
+   if &diff
+       highlight! link DiffText MatchParen
+   endif
+
+misc
+  
+folds
+   set foldmethod=syntax
+	automatically fold by syntax settings
+	indent is also an option
+   zc, zC, zo, zO, zR, zM
+	open, close, (reopen) open all, (minimize) fold allose
+   zn zN
+	temporarily undo all folds (until next fold op), unreset zn
+   zk, zj
+	move up/down to next fold
+   zx, zX
+	recompute folds (and then folding them), undo zx
+
+ctrl-p
+   c-t c-v c-s
+	open in new tab, or split
+   c-f c-b
+	change search mode
+   c-d
+	filename only mode (no path searching)
+   c-r
+	enable regex mode
+   up/down c-j c-k
+	move up/down
+   c-n c-p
+	browsing history
+   <F5>
+	refresh cache
+   :help ctrlp-mappings or type ? -> enter
+   esc c-c
+	exit ctrl-p
+
+see all bindings
+   :nmap :vmap :imap (or :help map for more)
+
+regex
+   \v is magic mode (think verbose?)
+   Searches hex values (e.g. 0xABC123)
+   \v0[xX][0-9a-fA-F]+
+
+tags
+   can generate for c code with (needs to be regenerated every so often...)
+	ctags -R .
+	but ctrl-] works then!
+	ctrl-} opens as preview window (use c-w z to close)
+
+
+auto complete
+   ctrl-n ctrl-p while typing (like a normal IDE's tab/ctrl+space)
+   ctrl-x ctrl-o (in succession) to bring up list of options

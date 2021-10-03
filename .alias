@@ -23,6 +23,7 @@ alias dirsizecurrent="echo 'Calculating...'; du -shc ./* | sort -rh"
 alias diffleft="diff --changed-group-format='%<' --unchanged-group-format=''"
 alias diffright="diff --changed-group-format='%>' --unchanged-group-format=''"
 alias where="whereis" # test... seems whereis works when where doesnt exist
+alias chexe='find . -maxdepth 1 -type f -print0 | xargs -0 chmod 644 >& /dev/null; find . -maxdepth 1 -type f \( -name "*.csh" -o -name "*.sh" -o -name "zoix.sim" -name "simv" \) -print0 | xargs -0 chmod 755 >& /dev/null'
 
 function tkdiff() {
   if [ "hash tkdiff" ]; then
@@ -41,7 +42,7 @@ function golink() {
     cd $d;
   else
     echo "usage: golink <symlink-file>"
-    echo "  e.g. sii ~/.vimrc"
+    echo "  e.g. ${FUNCNAME[0]} ~/.vimrc"
   fi
 }
 
@@ -49,7 +50,7 @@ function si() {
   if [ -n "$1" ]; then
     grep "$1" . -ri "${@:2}" --exclude-dir="node_modules";
   else
-    echo "usage: si <search-term> [<args>]"
+    echo "usage: ${FUNCNAME[0]} <search-term> [<args>]"
   fi
 }
 
@@ -57,9 +58,17 @@ function sii() {
   if [ -n "$1" ]; then
     grep "$1" . -ri --include="$2" "${@:3}" --exclude-dir="node_modules";
   else
-    echo "usage: sii <search-term> <filter-pattern> [<args>]"
-    echo "  e.g. sii main *.c"
+    echo "usage: ${FUNCNAME[0]} <search-term> <filter-pattern> [<args>]"
+    echo "  e.g. ${FUNCNAME[0]} main *.c"
   fi
 }
 
-alias chexe='find . -type f -print0 | xargs -0 chmod 644 >& /dev/null; chmod 755 *.csh *.sh >& /dev/null'
+function cdf() {
+  if [ -n "$1" ]; then
+    cd `dirname $1`
+  else
+    echo "usage: ${FUNCNAME[0]} <filepath>"
+    echo "  e.g. ${FUNCNAME[0]} ~/personal-files/.vimrc"
+  fi
+}
+
