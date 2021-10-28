@@ -4,6 +4,18 @@
 # LAST RECORDED UPDATE: Circa 2/12/2020
 # AUTHOR: DOMINIC DANG
 
+function trysource() {
+  if [ -n "$1" ]; then
+    if [[ -r $1 ]]; then
+      . $1
+    else
+      echo "Could not read file $1"
+    fi
+  else
+      echo "Bad argument to trysource '$1'"
+  fi
+}
+
 # read bashrc if it exists
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
@@ -33,13 +45,9 @@ fi
 # ===
 # === SOURCE FILES
 # ===
-if [ -f ~/.alias ]; then
-  source ~/.alias
-fi
-
-if [ -f ~/.perforcealias ]; then
-  source ~/.perforcealias
-fi
+trysource ~/.alias
+trysource ~/.alias-perforce
+trysource ~/.alias-local
 
 # ===
 # === ALIASES
@@ -97,6 +105,11 @@ case `uname` in
     ;;
   Darwin)
     ZSH_DISABLE_COMPFIX=true
+    # https://apple.stackexchange.com/questions/33677/how-can-i-configure-mac-terminal-to-have-color-ls-output
+    # enable ls color
+    export CLICOLOR=1
+    # mimic typical linux ls color scheme
+    export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
     shellos="MAC"
     ;;
   Linux)
@@ -116,9 +129,7 @@ case `uname` in
       # export DISPLAY="127.0.0.1:0.0"
       # ... current status, just let wsl set the status, dont set manually
       export winhome="$(wslvar USERPROFILE)"
-      if [ -f ~/.windows-alias ]; then
-        source ~/.windows-alias
-      fi
+      trysource ~/.alias-windows
     fi
 
     # turn off some dumb highlighting with folders with ls

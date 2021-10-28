@@ -1,0 +1,6 @@
+#/bin/bash
+
+# ====
+alias gocode='cd ~/code'
+alias goweb='cd ~/code/web'
+alias goprc='cd ~/gits/personal-rc-files'

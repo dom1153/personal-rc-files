@@ -144,6 +144,8 @@ endif
 
 " === filetype recognition ===
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" assumes bash is default
+autocmd BufNewFile,BufReadPost .alias* set filetype=sh
 
 " Don't allow editing of read only files
 autocmd BufRead * let &modifiable = !&readonly

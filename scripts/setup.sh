@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # README:
+# consider using -f to check personal-rc-files or better
 # run from the personal-rc-files folder, not your home directory!
 
 case `uname` in
@@ -11,10 +12,12 @@ case `uname` in
 esac
 
 wd="`dirname $PWD/$0`/../"
-dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig .tmux.conf .vimrc.pluginsettings .windows-alias)
+dotfiles=(.alias .alias-perforce .alias=windows .alias-local .bash_profile .gitconfig .tmux.conf .vimrc .vimrc.pluginsettings .zshrc)
 for d in ${dotfiles[*]}
 do
+  # consider using pwd of script then do .. and check appropriate files
   echo "ln -s "$wd/$d" ~/"
+  # consider using ln -f
   ln -s "$wd/$d" ~/
 done
 echo "SCRIPT: Done!"
