@@ -89,7 +89,8 @@ if has("gui_running")
   " set guioptions-=L " disable left scrollbar??
   " set cursorline    " highlight current line selected
   colorscheme desert
-  set lines=25 columns=80
+  " VVV This is bad since on Sx it will resize window
+  " set lines=25 columns=80
 
   if has("gui_gtk3") || has("gui_gtk2")
     " set guifont=Inconsolata\ 12
@@ -97,18 +98,26 @@ if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 9
   endif
 
+  " set tabs to have number then file name
+  set guitablabel=(%N)\ %f
+  " always show tab bar (default is 1)
+  set showtabline=2
+
   " highlilght color settings (gui primarily) [must be set after colorscheme]
   hi CursorLine guibg=grey5
   hi Normal guibg=grey17
-  hi search guibg=yellow guifg=grey10
-  hi incsearch guibg=yellow guifg=grey10 gui=none
-  hi cursor guifg=black
+  hi search guibg=khaki guifg=black
+  hi incsearch guibg=lightblue guifg=black gui=none
+  hi Cursor gui=reverse guibg=NONE guifg=NONE
   hi visual term=bold cterm=bold ctermfg=1 gui=bold guifg=LightBlue guibg=grey30
   " turn of all beeps
   set belloff=all
+  autocmd GUIEnter * winsize 80 25
 else
+  " note: windows terminal overrides cursor color and background
   set vb t_vb=
-  hi search cterm=NONE ctermfg=black ctermbg=yellow
+  hi search cterm=none ctermfg=black ctermbg=yellow
+  hi incsearch cterm=none ctermfg=black ctermbg=cyan
 endif
 
 " === Key mappings ===
@@ -182,3 +191,18 @@ function! GenerateUnicode(first, last)
     $put =c
   endwhile
 endfunction
+
+" autocmd FileType python set nocindent
+
+" all type override
+autocmd FileType * set expandtab          " force tab->spaces!
+autocmd FileType verilog set expandtab    " force tab->spaces!
+autocmd FileType html set expandtab    " force tab->spaces!
+
+" :help -> :tab help
+cabbrev help tab help
+
+" commands
+command! Sx execute "source ~/.vimrc"
+command! Xx execute "tabnew ~/.vimrc"
+command! RemoveTrailingWhitespace s/\s\+$//e

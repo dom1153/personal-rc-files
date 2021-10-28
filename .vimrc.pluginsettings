@@ -9,6 +9,7 @@ Plugin 'tpope/vim-repeat'           " repeat with surround, etc
 Plugin 'wellle/targets.vim'         " motions go to nearby {} (e.g. cin{)
 Plugin 'adelarsq/vim-matchit'       " % now works for <tags>
 Plugin 'godlygeek/tabular'          " Align with :Tabular or :Tab command
+Plugin 'kien/ctrlp.vim'             " ctrlp
 " Plugin 'easymotion/vim-easymotion'  " easy finding with <leader><leader>
 " Plugin 'bkad/CamelCaseMotion'       " camelcase with <leader>
 
@@ -67,6 +68,12 @@ if ((&t_Co == 256) || has("gui_running"))
                     \ }
         set noshowmode
     endif
+endif
+
+" use <leader-p> due to conflicts with (my) next buffer command
+if isdirectory(expand('~/.vim/bundle/ctrlp.vim'))
+    let g:ctrlp_map = '<leader>p'
+    " let g:ctrlp_extensions = ['tag']
 endif
 
 call vundle#end()

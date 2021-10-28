@@ -1,23 +1,46 @@
 #!/bin/bash
 
 # README:
-# consider using -f to check personal-rc-files or better
-# run from the personal-rc-files folder, not your home directory!
+# Assumes dot files are directory above
 
-case `uname` in
+case $(uname) in
   MSYS_NT-10.0)
     echo "ERROR: Windows seem to handle 'ln -s' as a copy. Use mklink instead"
     exit
   ;;
 esac
 
-wd="`dirname $PWD/$0`/../"
-dotfiles=(.alias .alias-perforce .alias=windows .alias-local .bash_profile .gitconfig .tmux.conf .vimrc .vimrc.pluginsettings .zshrc)
+expectedRCFolder='personal-rc-files'
+addArgs=""
+for arg in "$@"
+do
+    case $arg in
+        "-f" )
+           addArgs+="-f ";;
+   esac
+done
+
+# cd to script path
+# https://stackoverflow.com/questions/59895/how-can-i-get-the-source-directory-of-a-bash-script-from-within-the-script-itsel
+wd="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd $wd/..
+# https://stackoverflow.com/questions/1371261/get-current-directory-name-without-full-path-in-a-bash-script
+rcfolder=${PWD##*/}
+if [ "$rcfolder" != "$expectedRCFolder" ]
+then
+  echo "SCRIPT: Could not find folder '$expectedRCFolder' (expected to be above script location)"
+  exit
+fi
+dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig .tmux.conf .vimrc.pluginsettings .windows-alias)
 for d in ${dotfiles[*]}
 do
-  # consider using pwd of script then do .. and check appropriate files
-  echo "ln -s "$wd/$d" ~/"
-  # consider using ln -f
-  ln -s "$wd/$d" ~/
+  if [ ! -f $d ] 
+  then
+    echo "SCRIPT: Could not fild file $d"
+  else
+  cmd="ln -s $addArgs $PWD/$d $HOME"
+  echo SCRIPT: $cmd
+  $cmd
+  fi
 done
 echo "SCRIPT: Done!"

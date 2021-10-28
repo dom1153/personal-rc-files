@@ -1,0 +1,284 @@
+tar
+   extract
+      tar -xvf /path/to/yourfile.tgz
+   archive
+      tar -xvzf /path/to/yourfile.tgz
+
+sed
+   sed -i "/ztask_display/i $code" sim.working/g_0_g.c
+      appends whatever is stored in variable $code
+      i  insert (line above)
+      a  append (line below)
+      d  delete
+      s  substitue (s/findThis/replaceWithThis/)
+   echo "test" | sed "s/vim/replace"
+      
+tail 
+   -n  K             number of lines to print
+   -n +1             output lines starting from line K   
+
+grep
+   grep -E --color=auto "[0-9]{1,} Simulation primitives"
+	   -E             exteneded (regex)
+      --color=auto   highlights search results
+      -r             recurse directories
+      -n             show line numbers
+      --include      only search file names/ext (regex?)
+      -B# / -A#      show # of lines before/after
+      -l             reports file file names instead the text found
+
+cp
+   cp ~stars/whatever -rL
+      -L             derefences symlink, copies without link
+      -r             recurse directories
+
+find
+   find $directory -type f -name "*.in"
+      -maxdepth 1    useful to prevent recursing
+      -type f        filetype/directory/link specificiation (f, d, l)
+      -name          regex of file name to look for
+
+   find /dir1 -type f -printf "%f\n"
+   find stack_trace* -type f | xargs cat
+
+gdb
+   gdb --args executable arg1 arg2 arg3
+	   don't wrap the args in quotes! (--args 'zoix a b c')
+	   -x txt.cmds
+	   -batch??? (not needed, but it exists?)
+      -ex=r is short for -ex=run
+   gdb commands
+      until
+      watch                breaks when variable changes
+      frame                see what fn you are in the stack trace
+      bt                   backtrace
+      call	               function/code
+      list	               shows code
+      set listsize count
+      show listsize
+      printf "%s\n", scopeName
+      p/x
+        ^ prints hex
+      info macro CONST     shows expanded macro (doesn't work with zoix...)
+      macro expand CONST   shows expanded macro (doesn't work with zoix...)
+	      -> help macro
+      print binary in gdb
+         p /t 0x0000000000400398
+         $1 = 10000000000001110011000
+         > see 'help x' for more options/details
+      can retreive/print $1 variables
+      --ex=COMMAND         Calls command at the beginning of gdb (e.g. --ex=run)
+                              --ex="set environment VCS_NO_NO_STACK_REPORT=1"
+      set print elements 0
+         allows long strings to be printed wihtout truncation
+   
+
+
+cscope
+   generate files
+	   /my/project/dir -name '*.java' >/my/cscope/dir/cscope.files
+	cscope -b -q -k
+	cscope -d
+
+   p4 have | awk '/[.]([cChHyl]|cc|hh|yy|ll|cpp|cxx)$/ { print $3 }' > cscope.files
+   rm -rf cscope.files
+
+diff 
+   --brief     brief
+   -N          Skip abset files as empty (e.g. diff 2 dirs)
+   -r          Recursive (e.g. dir1/ dir2/ )
+   -y          side to side; requires a lot of horizontal space
+   -W          number of columns of each output line (-y)
+
+   diff one side
+      diff --changed-group-format='%<' --unchanged-group-format='' diffa.txt diffb.txt
+   
+wc 
+   -l          line numbers
+
+cat -e -t makefile_name
+   -e       show $ at end of each line
+   -t       show non-print characters (including tabs)
+   -v       verbose / show print characters (excludes tabs)
+
+misc
+   ldd
+   nm
+   module load gcc/6.2.0
+   tput colors    check out many colors your terminal is using
+      other useful variables $TERM (xterm) and $COLORTERM (gnome-terminal)
+
+tmux:
+   [prefix=ctrl+b]
+   prefix "	      horizontal split pane (" and ' looks like 1 and 2 vertically)
+   prefix %	      vertical split pane   (% looks like a left and right split pane?)
+   prefix arrow	move to pane
+   prefix :	      command menu
+   https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340
+   prefix [	      'copy'/scroll mode mode
+      normal bindings...
+         ctrl+space to select
+         alt+w to copy
+      with vi mode bindings...
+         space to select
+         enter to copy
+   prefix ]       paste
+   prefix [0-9]   switch to window
+
+   https://tmuxcheatsheet.com
+   prefix c       create new window
+   prefix ,       rename window
+   prefix l       go to last window
+
+   prefix x       close pane
+   prefix ctrl + arrow  resize pane (repeat ctrl + arrow)
+   prefix q       show pane #
+   prefix q #     jump to pane #
+   prefix { }     move pane to left/right
+   prefix !       convert pane to window
+
+   prefix ?       ... show hotkeys I guess
+   tmux list-keys ^ same
+
+   shift + mouse  perform normal mouse operation (select, middle mouse paste)
+   https://linux.die.net/man/1/tmux
+
+   * Denotes the current window.
+   - Marks the last window (previously selected).
+   # Window is monitored and activity has been detected.
+   ! A bell has occurred in the window.
+   + Window is monitored for content and it has appeared.
+   ~ The window has been silent for the monitor-silence interval. 
+
+e.g. of tmux options
+   tmux new-session -d 'vim'
+   tmux split-window -v 'ipython'
+   tmux split-window -h
+   tmux new-window 'mutt'
+   tmux -2 attach-session -d
+
+shell script (general)
+   Get file name without extension
+      base=`basename "$f"`
+      name=`basename "$f" ".c"`
+      dir=`dirname "$f"`
+
+   seq 1 9
+      [csh] set arr=(`seq 1 9`)
+
+   notify-send 'title' 'message'
+
+sort -rh 
+	-r reverse
+	-h human redable (human numeric sort, 2K 1G etc)
+
+
+csh preferences
+   color prompt
+      echo "\033[1;31m Hello \033[0m"
+
+      #The '31' and the '1' are the things you change. The '31' is the color code, and the '1' is where you put whatever you want to color. The rest of it is the same for every color coding; the beginning starts coloring, and the stuff afterwards stops coloring ('0' switches it back to default text color). You can use the following color codes:
+
+      #Code:
+      #30 - black
+      #31 - red
+      #32 - green
+      #33 - yellow
+      #34 - blue
+      #35 - magenta
+      #36 - cyan
+      #37 - white
+
+      these colors are your 'ansi colors'
+
+  aliasing with an argument (with quotes)
+      alias shout "echo \!:1 HA"
+
+misc
+   vim ~/.Xresources
+   xterm*background: black
+   xterm*foreground: lightgray
+
+c script
+   for loop
+      set arr=("item1 item2 item3") 
+      foreach i ($arr) 
+          echo ">>> Processing $i"
+      end
+
+csh specific
+   csh history commands
+      !! Repeats the previous command
+      !10 Repeat the 10th command from the history
+      !-2 Repeat the 2nd command (from the last) from the history
+      !string Repeat the command that starts with “string” from the history
+      !?string Repeat the command that contains the word “string” from the history
+      ^str1^str2^ Substitute str1 in the previous command with str2 and execute it
+      !!:$ Gets the last argument from the previous command.
+      !string:n Gets the nth argument from the command that starts with “string” from the history.
+      !^ first argument of the previous command
+      !$ last argument of the previous command
+      !* all arguments of the previous command
+      !:2 second argument of the previous command
+      !:2-3 second to third arguments of the previous command
+      !:2-$ second to last arguments of the previous command
+      !:2* second to last arguments of the previous command
+      !:2- second to next to last arguments of the previous command
+      !:0 the command itself
+
+   # set 256 colors
+   if (("$COLORTERM" == "gnome-terminal") || ("$COLORTERM" == "xfce4-terminal")) then
+       setenv TERM xterm-256color
+   else if ("$COLORTERM" == "rxvt-xpm") then
+       setenv TERM rxvt-256color
+   endif
+
+   # set grep search term highlight to red w/ white background
+   setenv GREP_COLOR '1;37;41'
+
+   simple csh yes no prompt (example)
+   while true; do
+       read -p "Do you wish to install this program?" yn
+       case $yn in
+           [Yy]* ) make install; break;;
+           [Nn]* ) exit;;
+           * ) echo "Please answer yes or no.";;
+       esac
+   done
+
+   redirection forced
+      a >! b.txt
+      in bash this is | instead of !
+   csh output to nothing
+      >& /dev/null
+
+xargs
+   using find with vi and xargs?
+      cd `ff 9001452299 | head -1`
+      cd "$(dirname "$(find . -type f -name ls | head -1)")"
+      ff 9001452299 | xargs vi 
+
+sh script
+   get base file name
+      ${f%.*}
+   replace with extension (e.g. .o)
+      ${f%.*}.o
+
+resume/pause
+   ctrl-z to pause (bg)
+   fg to unpause
+   see all bg with jobs
+   fg %1 to resume item 1 (according to jobs)
+
+midnight commander
+   ctrl-o  minimize to shell/restore
+   mc -x (enable mouse support), since bindings like f10 are binded to other things
+
+gnome config
+    gnome-tweaks can be launched via command line if not found in applications menu
+    can set css such as titlebar height in ~/.config/gtk-3.0/gtk.css
+    can use alt+f2 with command 'r' to refresh/restart layout to use new css
+
+ping localhost
+
+echo "the infinite void" > /dev/null
