@@ -31,7 +31,7 @@ then
   echo "SCRIPT: Could not find folder '$expectedRCFolder' (expected to be above script location)"
   exit
 fi
-dotfiles=(.alias .bash_profile .perforcealias .vimrc .zshrc .gitconfig .tmux.conf .vimrc.pluginsettings .windows-alias)
+dotfiles=(.alias .alias-perforce .alias-windows .alias-local .bash_profile .zshrc .gitconfig .tmux.conf .vimrc .vimrc.pluginsettings)
 for d in ${dotfiles[*]}
 do
   if [ ! -f $d ] 
