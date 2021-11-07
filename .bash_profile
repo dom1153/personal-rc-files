@@ -19,44 +19,13 @@ function trysource() {
 # read bashrc if it exists
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
-# to search last command with ! type space instead of tab
-bind Space:magic-space
-
-# ~/.local/bin missing from path is a bash 4.4 bug
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
-export EDITOR='vim'
-
-# rbenv (ruby) setup https://github.com/rbenv/rbenv#basic-github-checkout
-if [ -d "$HOME/.rbenv/bin" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  if [ -d "$HOME/.rbenv/shims" ]; then
-    export PATH="$HOME/.rbenv/shims:$PATH"
-  fi
-  if [ -d "$HOME/gems" ]; then
-    export GEM_HOME="$HOME/gems"
-    export PATH="$HOME/gems/bin:$PATH"
-  fi
-  source ~/.rbenv/completions/rbenv.bash
-  rbenv rehash
-  eval "$(rbenv init -)"
-fi
-
-if [ $(command -v yarn 2>/dev/null) ]; then
-  export PATH="$(yarn global bin):$PATH"
-fi
-
 # ===
 # === SOURCE FILES
 # ===
 trysource ~/.alias
 trysource ~/.alias-perforce
 trysource ~/.alias-local
-
-# ===
-# === ALIASES
-# ===
-alias sx="source ~/.bash_profile"
-alias xx='vim ~/.bash_profile'
+trysource ~/.bash.pathsettings
 
 # ===
 # === TERM SETTINGS
@@ -65,8 +34,8 @@ alias xx='vim ~/.bash_profile'
 stty -ixon
 
 # ===
-# === Default bash settings
-# === Things that come with linux/ubuntu rc files
+# === DEFAULT BASH SETTINGS
+# === (default from linux/ubuntu rc files)
 # append to history file, don't overwrite it
 shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -89,14 +58,17 @@ if [ -n "$force_color_prompt" ]; then
   fi
 fi
 unset color_prompt force_color_prompt
+
+# ===
+# === MY BASH SETTINGS
+# ===
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
 fi
+# to search last command with ! type space instead of tab
+bind Space:magic-space
+export EDITOR='vim'
 
 # ===
 # === OS SPECIFIC SETTINGS 

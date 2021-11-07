@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# ~/.local/bin missing from path is a bash 4.4 bug
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+
+# rbenv (ruby) setup https://github.com/rbenv/rbenv#basic-github-checkout
+if [ -d "$HOME/.rbenv/bin" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  if [ -d "$HOME/.rbenv/shims" ]; then
+    export PATH="$HOME/.rbenv/shims:$PATH"
+  fi
+  if [ -d "$HOME/gems" ]; then
+    export GEM_HOME="$HOME/gems"
+    export PATH="$HOME/gems/bin:$PATH"
+  fi
+  source ~/.rbenv/completions/rbenv.bash
+  rbenv rehash
+  eval "$(rbenv init -)"
+fi
+
+# yarn into path
+if [ $(command -v yarn 2>/dev/null) ]; then
+  export PATH="$(yarn global bin):$PATH"
+fi

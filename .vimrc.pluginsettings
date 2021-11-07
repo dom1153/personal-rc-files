@@ -10,6 +10,7 @@ Plugin 'wellle/targets.vim'         " motions go to nearby {} (e.g. cin{)
 Plugin 'adelarsq/vim-matchit'       " % now works for <tags>
 Plugin 'godlygeek/tabular'          " Align with :Tabular or :Tab command
 Plugin 'kien/ctrlp.vim'             " ctrlp
+Plugin 'preservim/nerdtree'         " NERDtree, netrw replacement
 " Plugin 'easymotion/vim-easymotion'  " easy finding with <leader><leader>
 " Plugin 'bkad/CamelCaseMotion'       " camelcase with <leader>
 
@@ -76,10 +77,16 @@ if isdirectory(expand('~/.vim/bundle/ctrlp.vim'))
     " let g:ctrlp_extensions = ['tag']
 endif
 
-call vundle#end()
-filetype plugin indent on
+if isdirectory(expand('~/.vim/bundle/nerdtree'))
+  let NERDTreeShowLineNumbers = 0
+  map <leader>n :NERDTreeFocus<CR>
+else
+endif
 
-" netrw is the default file explorer (plugin). toggle with i in explorer. 
+" netrw settings (basically a built-in plugin)
 " 3 = tree view
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
+
+call vundle#end()
+filetype plugin indent on

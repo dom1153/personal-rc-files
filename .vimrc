@@ -127,6 +127,10 @@ noremap <C-a> ggVG
 " next/previous buffer
 nnoremap <c-n> :bn<CR>
 nnoremap <c-p> :bp<CR>
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " copy/paste from clip board
 " noremap <C-S-c> "+y   
@@ -138,10 +142,21 @@ nnoremap <c-p> :bp<CR>
 " === scripts/autocmd ===
 if v:version >= 800 || (has("&relativenumber"))
   set relativenumber      " relative number (combined with number in 7.4 is a hybrid mode)
+  fun! HandleRelativeNumberFocus(enable)
+    " don't enable for these filetypes (Or with \|)
+    if &ft =~ 'nerdtree'
+      return
+    endif
+    if a:enable == "on"
+      set relativenumber
+    else
+      set norelativenumber
+    endif
+  endfun
   augroup numbertoggle
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    autocmd BufEnter,FocusGained,InsertLeave * call HandleRelativeNumberFocus("on")
+    autocmd BufLeave,FocusLost,InsertEnter   * call HandleRelativeNumberFocus("off")
   augroup END
 endif
 
@@ -153,8 +168,6 @@ endif
 
 " === filetype recognition ===
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" assumes bash is default
-autocmd BufNewFile,BufReadPost .alias* set filetype=sh
 
 " Don't allow editing of read only files
 autocmd BufRead * let &modifiable = !&readonly
