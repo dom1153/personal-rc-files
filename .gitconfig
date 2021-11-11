@@ -15,3 +15,5 @@
 	path = ~/.gitconfig-mac-m1
 [includeIf "gitdir:/usr/local/bin"]
 	path = ~/.gitconfig-mac-intel
+[includeIf "/usr/bin/gh"]
+	path = ~/.gitconfig-linux
