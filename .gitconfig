@@ -11,9 +11,9 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[includeIf "gitdir:/usr/bin"]
+	path = ~/.gitconfig-linux
 [includeIf "gitdir:/opt/homebrew/bin"]
 	path = ~/.gitconfig-mac-m1
 [includeIf "gitdir:/usr/local/bin"]
 	path = ~/.gitconfig-mac-intel
-[includeIf "gitdir:/usr/bin/gh"]
-	path = ~/.gitconfig-linux
