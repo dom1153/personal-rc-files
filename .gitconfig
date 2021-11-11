@@ -11,8 +11,8 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[credential "https://github.com"]
 [includeIf "gitdir:/opt/homebrew/bin"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	path = ~/.git-mac-m1
 [includeIf "gitdir:/usr/local/bin"]
+	path = ~/.git-mac-intel
 	helper = !/usr/local/bin/gh auth git-credential
