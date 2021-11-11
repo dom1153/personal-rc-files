@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # === scripts ===
 # recursivly set files and folders to be non-executable
@@ -9,6 +9,8 @@ function fixperms() {
 
 # === general unix commands ===
 # interactive rm instead of no prompt
+alias sx="source ~/.bash_profile"
+alias xx='vim ~/.bash_profile'
 alias untargz='tar xvf'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -18,12 +20,17 @@ alias l="ls -lh"
 alias la="ls -lah"
 alias hist="history"
 alias dirsize="du -sh"
-# alias dirsizecurrent="du -sh ./*"
 alias dirsizecurrent="echo 'Calculating...'; du -shc ./* | sort -rh"
 alias diffleft="diff --changed-group-format='%<' --unchanged-group-format=''"
 alias diffright="diff --changed-group-format='%>' --unchanged-group-format=''"
 alias where="whereis" # test... seems whereis works when where doesnt exist
 alias chexe='find . -maxdepth 1 -type f -print0 | xargs -0 chmod 644 >& /dev/null; find . -maxdepth 1 -type f \( -name "*.csh" -o -name "*.sh" -o -name "zoix.sim" -name "simv" \) -print0 | xargs -0 chmod 755 >& /dev/null'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+# alias dirsizecurrent="du -sh ./*"
+# VVV maybe linux only? (no mac os)
+# alias ls='ls --color=auto'
 
 function tkdiff() {
   if [ "hash tkdiff" ]; then

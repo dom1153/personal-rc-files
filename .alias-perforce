@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # we don't have p4 installed, but we can make a function!
 function p4() {
