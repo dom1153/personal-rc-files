@@ -113,6 +113,12 @@ case $(uname) in
     export CLICOLOR=1
     # mimic typical linux ls color scheme
     export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+    # remove annoying bash message
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+    # new brew eval command I guess
+    if [ -f /opt/homebrew/bin/brew ]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
     shellos="MAC"
     ;;
   Linux)

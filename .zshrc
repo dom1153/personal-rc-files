@@ -35,7 +35,6 @@ export EDITOR='vim'
 
 # =========================== ALIASES ==================================
 source ~/.alias
-source ~/.perforcealias
 alias sx='source ~/.zshrc'
 alias xx='vim ~/.zshrc'
 
