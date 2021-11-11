@@ -1,0 +1,20 @@
+# for config docs read .yml file from github release page
+# ctrl-shift + space togges vi mode
+window:
+  padding:
+    x: 0
+    y: 5
+  dimensions:
+    columns: 120
+    lines: 20
+
+font:
+  normal:
+    macOS:
+      family: Menlo
+    style: Regular
+  size: 12.0
+  # disable bold fonts
+  bold:
+    family:
+    style: Regular
