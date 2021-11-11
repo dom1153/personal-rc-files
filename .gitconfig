@@ -11,8 +11,8 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[includeIf "gitdir:/usr/bin"]
-	path = ~/.gitconfig-linux
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
 [includeIf "gitdir:/opt/homebrew/bin"]
 	path = ~/.gitconfig-mac-m1
 [includeIf "gitdir:/usr/local/bin"]

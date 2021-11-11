@@ -32,7 +32,7 @@ then
   exit
 fi
 # consider moving this to .config dir someday
-dotfiles=(.alias .alias-perforce .alias-windows .alias-local .alacritty.yml .bash_profile .bash.pathsettings .zshrc .gitconfig .gitconfig-mac-intel .gitconfig-mac-m1 .gitconfig-linux .tmux.conf .vimrc .vimrc.pluginsettings)
+dotfiles=(.alias .alias-perforce .alias-windows .alias-local .alacritty.yml .bash_profile .bash.pathsettings .zshrc .gitconfig .gitconfig-mac-intel .gitconfig-mac-m1 .tmux.conf .vimrc .vimrc.pluginsettings)
 for d in ${dotfiles[*]}
 do
   if [ ! -f $d ] 
