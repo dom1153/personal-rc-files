@@ -12,7 +12,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [includeIf "gitdir:/opt/homebrew/bin"]
-	path = ~/.git-mac-m1
+	path = ~/.gitconfig-mac-m1
 [includeIf "gitdir:/usr/local/bin"]
-	path = ~/.git-mac-intel
+	path = ~/.gitconfig-mac-intel
 	helper = !/usr/local/bin/gh auth git-credential
