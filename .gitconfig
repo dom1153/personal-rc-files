@@ -11,13 +11,7 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[credential]
-	helper = cache --timeout 7200
-	helper = 
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [includeIf "gitdir:/opt/homebrew/bin"]
 	path = ~/.gitconfig-mac-m1
 [includeIf "gitdir:/usr/local/bin"]
 	path = ~/.gitconfig-mac-intel
-	helper = !/usr/local/bin/gh auth git-credential
