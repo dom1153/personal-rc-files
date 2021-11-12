@@ -20,6 +20,8 @@ do
    esac
 done
 
+# consider moving this to .config/dotfiles someday
+
 # cd to script path
 # https://stackoverflow.com/questions/59895/how-can-i-get-the-source-directory-of-a-bash-script-from-within-the-script-itsel
 wd="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -31,8 +33,7 @@ then
   echo "SCRIPT: Could not find folder '$expectedRCFolder' (expected to be above script location)"
   exit
 fi
-# consider moving this to .config dir someday
-dotfiles=(.alias .alias-perforce .alias-windows .alias-local .alacritty.yml .bash_profile .bash.pathsettings .zshrc .gitconfig .gitconfig-mac-intel .gitconfig-mac-m1 .tmux.conf .vimrc .vimrc.pluginsettings)
+dotfiles=(.alias .alias-perforce .alias-windows .alias-local .alacritty.yml .bash_profile .bash.pathsettings .zshrc .gitconfig .tmux.conf .vimrc .vimrc.pluginsettings)
 for d in ${dotfiles[*]}
 do
   if [ ! -f $d ] 
@@ -44,4 +45,24 @@ do
   $cmd
   fi
 done
+
+function tryGitConfig() {
+  if [ -f "$1" ]; then
+    cmd="ln -s $addArgs $PWD/$2 $HOME/$localGitFile"
+    echo SCRIPT: $cmd
+    $cmd
+  fi
+}
+
+# setup os specific (gh include)
+localGitFile=".gitconfig-local"
+case $(uname) in
+  Darwin)
+    tryGitConfig "/opt/homebrew/bin/gh" ".gitconfig-mac-m1"
+    tryGitConfig "/usr/local/bin/gh" ".gitconfig-mac-intel"
+    ;;
+  Linux)
+    tryGitConfig "/usr/bin/gh" ".gitconfig-linux"
+esac
+
 echo "SCRIPT: Done!"
