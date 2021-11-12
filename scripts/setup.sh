@@ -46,6 +46,7 @@ do
   fi
 done
 
+localGitFile=".gitconfig-local"
 function tryGitConfig() {
   if [ -f "$1" ]; then
     cmd="ln -s $addArgs $PWD/$2 $HOME/$localGitFile"
@@ -55,7 +56,6 @@ function tryGitConfig() {
 }
 
 # setup os specific (gh include)
-localGitFile=".gitconfig-local"
 case $(uname) in
   Darwin)
     tryGitConfig "/opt/homebrew/bin/gh" ".gitconfig-mac-m1"
