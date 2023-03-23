@@ -3,6 +3,9 @@
 # AUTHOR: DOMINIC DANG
 
 # =======================================================================
+[[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
+
+# =======================================================================
 # HACK: assume the default zsh_custom avoid sourcing zsh twice
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 

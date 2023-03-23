@@ -4,6 +4,13 @@
 # LAST RECORDED UPDATE: Circa 2/12/2020
 # AUTHOR: DOMINIC DANG
 
+# check if bash. zsh will try to source this as shell
+isbash=false
+if [ $0 == "/bin/bash" ]; then
+  echo "is bash!"
+  isbash=true
+fi
+
 function trysource() {
   if [ -n "$1" ]; then
     if [[ -r $1 ]]; then
@@ -36,14 +43,17 @@ stty -ixon
 # ===
 # === DEFAULT BASH SETTINGS
 # === (default from linux/ubuntu rc files)
-# append to history file, don't overwrite it
-shopt -s histappend
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+#
+if [ $isbash == true ]; then
+  # append to history file, don't overwrite it
+  shopt -s histappend
+  # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+  HISTSIZE=1000
+  HISTFILESIZE=2000
+  # check the window size after each command and, if necessary,
+  # update the values of LINES and COLUMNS.
+  shopt -s checkwinsize
+fi 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -66,8 +76,11 @@ unset color_prompt force_color_prompt
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-# to search last command with ! type space instead of tab
-bind Space:magic-space
+
+if [ $isbash == true ]; then
+  # to search last command with ! type space instead of tab
+  bind Space:magic-space
+fi 
 export EDITOR='vim'
 
 # ===
@@ -120,15 +133,17 @@ case $(uname) in
     ;;
 esac
 
-# ===
-# === PROMPT (BASH)
-# ===
-red="\[\033[31m\]"
-green="\[\033[32m\]"
-yellow="\[\033[33m\]"
-blue="\[\033[34m\]"
-magenta="\[\033[35m\]"
-cyan="\[\033[36m\]"
-white="\[\033[37m\]"
-endcolor="\[\033[0m\]"
-export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
+if [ $isbash == true ]; then
+  # ===
+  # === PROMPT (BASH)
+  # ===
+  red="\[\033[31m\]"
+  green="\[\033[32m\]"
+  yellow="\[\033[33m\]"
+  blue="\[\033[34m\]"
+  magenta="\[\033[35m\]"
+  cyan="\[\033[36m\]"
+  white="\[\033[37m\]"
+  endcolor="\[\033[0m\]"
+  export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
+fi
