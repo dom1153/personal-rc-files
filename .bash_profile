@@ -7,7 +7,7 @@
 # check if bash. zsh will try to source this as shell
 isbash=false
 if [ $0 == "/bin/bash" ]; then
-  echo "is bash!"
+  # echo "is bash!"
   isbash=true
 fi
 
