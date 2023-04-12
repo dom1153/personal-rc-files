@@ -33,6 +33,36 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir
 # VVV maybe linux only? (no mac os)
 # alias ls='ls --color=auto'
 
+# === general unix commands ===
+### VVV move to its own react alias...
+# npm related aliases ; hardcode paths for now lol...
+scriptfldr="$HOME/fav/personal-rc-files/scripts"
+if [ -d $scriptfldr ]; then
+#   ### TODO: add package flows (react, vite, tailwind, etc)
+#   ### cp more scripts for debug, install, run
+#   ### that... and an empty vite project
+#   ### have run.csh check for node_modules , else npm install
+  alias addnpmscripts="cp $scriptfldr/reactTemplate/*.sh ."
+  alias cleannoderecursive="$scriptfldr/node/cleannoderecursive.sh"
+
+  function createViteReact() {
+    if [ -z "$1" ]; then
+      echo "${0} : Please supply a project (folder) name"
+    elif [ -d "$1" ]; then
+      echo "${0} : Folder '$1' already exists"
+    fi
+
+    ### npm init vite $1 -y
+    ### vite v4.2.0 😎 react 18.2.0
+    mkdir -p $1
+    cd $1
+    cp -r $scriptfldr/node/viteReactTemplate/* .
+    cp -r $scriptfldr/node/viteReactTemplate/.gitignore .
+    mkdir -p public
+    echo "Project folder '$1' created (also now in directory)'"
+  }
+fi
+
 function tkdiff() {
   if [ "hash tkdiff" ]; then
     echo "ALIAS: Backgrounding this for you with &"

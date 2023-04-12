@@ -8,6 +8,8 @@
 # === SOURCE BASH RC
 # ===
 [[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
+### For convenience
+### ~/.alias ~/.alias-perforce ~/.alias-local ~/.bash.pathsettings
 
 # ===
 # === PROMPT
