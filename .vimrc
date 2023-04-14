@@ -83,12 +83,12 @@ else
 endif
 
 " ==== GUI settings / Color Scheme===
+colorscheme desert
 if has("gui_running") 
   set guioptions-=T
   " set guioptions-=r " enable right scrollbar
   " set guioptions-=L " disable left scrollbar??
   " set cursorline    " highlight current line selected
-  colorscheme desert
   " VVV This is bad since on Sx it will resize window
   " set lines=25 columns=80
 
