@@ -42,7 +42,7 @@ if [ -d $scriptfldr ]; then
 #   ### cp more scripts for debug, install, run
 #   ### that... and an empty vite project
 #   ### have run.csh check for node_modules , else npm install
-  alias addnpmscripts="cp $scriptfldr/reactTemplate/*.sh ."
+  alias addnpmscripts="cp $scriptfldr/node/viteReactTemplate//*.sh ."
   alias cleannoderecursive="$scriptfldr/node/cleannoderecursive.sh"
 
   function createViteReact() {
