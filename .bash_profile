@@ -6,7 +6,7 @@
 
 # check if bash. zsh will try to source this as shell
 isbash=false
-if [ $0 == "/bin/bash" ]; then
+if [[ $0 == *"bash"* ]]; then
   # echo "is bash!"
   isbash=true
 fi
@@ -121,6 +121,8 @@ case $(uname) in
       # export DISPLAY="DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0"
       if [ -z $DISPLAY ]; then
         export DISPLAY="localhost:0"
+        
+        export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 ### for use with X410
       fi
       # export DISPLAY="127.0.0.1:0.0"
       # ... current status, just let wsl set the status, dont set manually
