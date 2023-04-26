@@ -11,6 +11,7 @@ function fixperms() {
 # interactive rm instead of no prompt
 alias sx="source ~/.bash_profile"
 alias xx='vim ~/.bash_profile'
+alias xxa='vim ~/.alias'
 alias untargz='tar xvf'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -28,7 +29,6 @@ alias chexe='find . -maxdepth 1 -type f -print0 | xargs -0 chmod 644 >& /dev/nul
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 # alias dirsizecurrent="du -sh ./*"
 # VVV maybe linux only? (no mac os)
 # alias ls='ls --color=auto'
@@ -63,9 +63,22 @@ if [ -d $scriptfldr ]; then
   }
 fi
 
-function tkdiff() {
-  if [ "hash tkdiff" ]; then
+### VVV use S and ^D for non-hacky flow
+function r() {
+  if [ -z `hash ranger` ]; then
+    ranger $@ --choosedir=$HOME/.rangerdir;
+    LASTDIR=`cat $HOME/.rangerdir`; 
+    cd "$LASTDIR"
+  else
+    echo "ranger not found or installed"
+  fi
+}
+
+### VVV cant figure out how to make this work in mac zsh / bash
+function tkd() {
+  if [ -z `hash tkdiff` ]; then
     echo "ALIAS: Backgrounding this for you with &"
+    # $(which tkdiff) $@ &
     $(which tkdiff) $@ &
   else
     echo "tkdiff not found or installed"
@@ -74,10 +87,23 @@ function tkdiff() {
 
 # multililne aliases
 function golink() {
+  ### note this assumes your in the same directory...
   if [ -n "$1" ]; then
-    l=$(readlink $1);
-    d=$(dirname $l);
-    cd $d;
+    if [ ! -L $1 ]; then
+      echo "$1 is not a symlink"
+    else
+      p=$PWD;
+      l=$(readlink $1);
+      echo "$l"
+      if [ -d "$l" ]; then
+        cd $l;
+      elif [ -f "$l" ]; then
+        d=$(dirname $l);
+        cd $d;
+      else
+        echo "$1 appears to be a broken link or unhandled scenario"
+      fi
+    fi
   else
     echo "usage: golink <symlink-file>"
     echo "  e.g. ${FUNCNAME[0]} ~/.vimrc"
