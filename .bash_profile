@@ -24,7 +24,9 @@ function trysource() {
 }
 
 # read bashrc if it exists
-[[ -r ~/.bashrc ]] && . ~/.bashrc
+if [ $isbash == true ]; then
+  [[ -r ~/.bashrc ]] && . ~/.bashrc
+fi
 
 # ===
 # === SOURCE FILES
@@ -149,3 +151,6 @@ if [ $isbash == true ]; then
   endcolor="\[\033[0m\]"
   export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
 fi
+. "$HOME/.cargo/env"
+
+# [ -f $HOME/.bashrc ] && . $HOME/.bashrc
