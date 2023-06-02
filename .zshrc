@@ -47,3 +47,11 @@ fi
 # =========================== ALIASES OVERRIDE =========================
 alias sx='source ~/.zshrc'
 alias xx='vim ~/.zshrc'
+
+# pnpm
+export PNPM_HOME="/home/archoo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
