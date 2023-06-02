@@ -48,8 +48,16 @@ fi
 alias sx='source ~/.zshrc'
 alias xx='vim ~/.zshrc'
 
+case $OSTYPE in
+  darwin*)
+    export PNPM_HOME="$HOME/Library/pnpm"
+    ;;
+  linux-*)
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    ;;
+esac
+
 # pnpm
-export PNPM_HOME="/Users/archoo/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

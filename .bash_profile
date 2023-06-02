@@ -24,7 +24,9 @@ function trysource() {
 }
 
 # read bashrc if it exists
-[[ -r ~/.bashrc ]] && . ~/.bashrc
+if [ $isbash == true ]; then
+  [[ -r ~/.bashrc ]] && . ~/.bashrc
+fi
 
 # ===
 # === SOURCE FILES
@@ -150,3 +152,11 @@ if [ $isbash == true ]; then
   export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
 fi
 . "$HOME/.cargo/env"
+
+### node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+
+# [ -f $HOME/.bashrc ] && . $HOME/.bashrc
