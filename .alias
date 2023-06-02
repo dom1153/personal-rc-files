@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### "${FUNCNAME[0]} bash
+### "${funcstack[0]} zsh
+
 # === scripts ===
 # recursivly set files and folders to be non-executable
 function fixperms() {
@@ -42,24 +45,24 @@ if [ -d $scriptfldr ]; then
 #   ### cp more scripts for debug, install, run
 #   ### that... and an empty vite project
 #   ### have run.csh check for node_modules , else npm install
-  alias addnpmscripts="cp $scriptfldr/node/viteReactTemplate//*.sh ."
+  alias addnpmscripts="cp $scriptfldr/node/viteReactTemplate/*.sh ."
   alias cleannoderecursive="$scriptfldr/node/cleannoderecursive.sh"
 
   function createViteReact() {
     if [ -z "$1" ]; then
-      echo "${0} : Please supply a project (folder) name"
+      echo "createViteReact: Please supply a project (folder) name"
     elif [ -d "$1" ]; then
-      echo "${0} : Folder '$1' already exists"
+      echo "createViteReact: Folder '$1' already exists"
+    else
+      ### npm init vite $1 -y
+      ### vite v4.2.0 😎 react 18.2.0
+      mkdir -p $1
+      cd $1
+      cp -r $scriptfldr/node/viteReactTemplate/* .
+      cp -r $scriptfldr/node/viteReactTemplate/.gitignore .
+      mkdir -p public
+      echo "Project folder '$1' created (also now in directory)'"
     fi
-
-    ### npm init vite $1 -y
-    ### vite v4.2.0 😎 react 18.2.0
-    mkdir -p $1
-    cd $1
-    cp -r $scriptfldr/node/viteReactTemplate/* .
-    cp -r $scriptfldr/node/viteReactTemplate/.gitignore .
-    mkdir -p public
-    echo "Project folder '$1' created (also now in directory)'"
   }
 fi
 
@@ -106,7 +109,7 @@ function golink() {
     fi
   else
     echo "usage: golink <symlink-file>"
-    echo "  e.g. ${FUNCNAME[0]} ~/.vimrc"
+    echo "  e.g. golink ~/.vimrc"
   fi
 }
 
@@ -114,7 +117,7 @@ function si() {
   if [ -n "$1" ]; then
     grep "$1" . -ri "${@:2}" --exclude-dir="node_modules";
   else
-    echo "usage: ${FUNCNAME[0]} <search-term> [<args>]"
+    echo "usage: si <search-term> [<args>]"
   fi
 }
 
@@ -122,8 +125,8 @@ function sii() {
   if [ -n "$1" ]; then
     grep "$1" . -ri --include="$2" "${@:3}" --exclude-dir="node_modules";
   else
-    echo "usage: ${FUNCNAME[0]} <search-term> <filter-pattern> [<args>]"
-    echo "  e.g. ${FUNCNAME[0]} main *.c"
+    echo "usage: sii <search-term> <filter-pattern> [<args>]"
+    echo "  e.g. sii main *.c"
   fi
 }
 
@@ -131,8 +134,8 @@ function cdf() {
   if [ -n "$1" ]; then
     cd $(dirname $1)
   else
-    echo "usage: ${FUNCNAME[0]} <filepath>"
-    echo "  e.g. ${FUNCNAME[0]} ~/personal-files/.vimrc"
+    echo "usage: cdf <filepath>"
+    echo "  e.g. cdf ~/personal-files/.vimrc"
   fi
 }
 

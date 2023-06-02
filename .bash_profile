@@ -149,3 +149,4 @@ if [ $isbash == true ]; then
   endcolor="\[\033[0m\]"
   export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
 fi
+. "$HOME/.cargo/env"
