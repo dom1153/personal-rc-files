@@ -151,12 +151,11 @@ if [ $isbash == true ]; then
   endcolor="\[\033[0m\]"
   export PS1="${white}╭─${endcolor}${green} \u@\h${endcolor} | ${cyan}\d${endcolor} | ${cyan}\@${endcolor} | ${cyan}$shellos${endcolor}\n│ ${yello}\w${endcolor}\n╰─$ "
 fi
-. "$HOME/.cargo/env"
 
 ### node version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "$HOME/.cargo/env"
+[ -d "$HOME/.cargo" ] && . "$HOME/.cargo/env"
 
 # [ -f $HOME/.bashrc ] && . $HOME/.bashrc

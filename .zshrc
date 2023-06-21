@@ -63,3 +63,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+if [[ -e "$HOME/.zshrc.archcraft" ]]; then
+  source ~/.zshrc.archcraft
+fi
