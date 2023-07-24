@@ -38,13 +38,24 @@ for d in ${dotfiles[*]}
 do
   if [ ! -f $d ] 
   then
-    echo "SCRIPT: Could not fild file $d"
+    echo "SCRIPT: Could not find file $d"
   else
   cmd="ln -s $addArgs $PWD/$d $HOME"
   echo SCRIPT: $cmd
   $cmd
   fi
 done
+
+if  [ -d "$HOME/.config" ]; then
+  d="$HOME/.config/nvim"
+  f="init.vim"
+  mkdir -p $d
+  if [ -f "$PWD/$f" ]; then
+    cmd="ln -s $addargs "$PWD/$f" "$d/$f""
+    echo SCRIPT: $cmd
+    $cmd
+  fi
+fi
 
 localGitFile=".gitconfig-local"
 function tryGitConfig() {
