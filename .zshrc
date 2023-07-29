@@ -19,6 +19,12 @@ export PS1="╭─ %F{green}%n@%m%f | %F{blue}%W | %t %f
 ╰─%# "
 
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
+  ### true -> auto upgrade
+  # DISABLE_AUTO_UPDATE=true
+  ### true -> disable 'would you like to update?' prompt
+  DISABLE_UPDATE_PROMPT=true
+  ### check how often it checks for upgrades
+  # UPDATE_ZSH_DAYS
   # === HACK: assume the default zsh_custom avoid sourcing zsh twice
   export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
